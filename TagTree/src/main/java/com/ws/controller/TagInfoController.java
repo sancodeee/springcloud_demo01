@@ -1,0 +1,51 @@
+package com.ws.controller;
+
+import com.ws.pojo.TagInfo;
+import com.ws.service.TagInfoService;
+import com.ws.vo.TagInfoVO;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Slf4j
+@RestController
+@RequestMapping(value = "/tagInfo")
+public class TagInfoController {
+
+    @Autowired
+    private TagInfoService tagInfoService;
+
+    /**
+     * 添加标签信息
+     *
+     * @param tagInfo TagInfo
+     * @param result  BindingResult
+     * @return Boolean
+     */
+    @PostMapping(value = "/add")
+    public Boolean addTagInfo(@RequestBody TagInfo tagInfo, BindingResult result) {
+        log.info("校验结果：{}", result.getAllErrors());
+        return tagInfoService.addTagInfo(tagInfo);
+    }
+
+    /**
+     * 根据父标签id获取子标签
+     *
+     * @param parentId Long
+     * @return List<TagInfo>
+     */
+    @GetMapping(value = "/getByParent")
+    public List<TagInfo> getTagInfoByParent(@RequestParam(value = "parentId") Long parentId) {
+        return tagInfoService.getTagInfoByParent(parentId);
+    }
+
+    @GetMapping(value = "/getAllChildByParent")
+    public List<TagInfoVO> getAllChildByParent(@RequestParam(value = "parentId") Long parentId) {
+        return null;
+    }
+
+
+}

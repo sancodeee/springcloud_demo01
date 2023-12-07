@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
+      username: root
+      password: 169167866Spl.
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**/*.Mapper.xml

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ws.dao.TagInfoMapper">
+
+    <select id="getAllChildByParent" resultType="com.ws.vo.TagInfoVO" parameterType="long">
+        with recursive t1 as (select *
+                              from sc_tag_info p
+                              where id = #{id}
+                              union all
+                              select t.*
+                              from sc_tag_info t
+                                       inner join t1 on t1.id = t.parent_id)
+        select *
+        from t1
+    </select>
+</mapper>
