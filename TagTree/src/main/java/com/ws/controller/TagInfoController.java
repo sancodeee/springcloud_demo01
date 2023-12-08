@@ -2,7 +2,7 @@ package com.ws.controller;
 
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
-import com.ws.vo.TagInfoVO;
+import com.ws.vo.TagInfoVO2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -42,9 +42,15 @@ public class TagInfoController {
         return tagInfoService.getTagInfoByParent(id);
     }
 
+    /**
+     * 根据标签id查询所有子标签
+     *
+     * @param id
+     * @return
+     */
     @GetMapping(value = "/getAllChildByParent")
-    public List<TagInfoVO> getAllChildByParent(@RequestParam(value = "id") Long id) {
-        return null;
+    public List<TagInfoVO2> getAllChildByParent(@RequestParam(value = "id") Long id) {
+        return tagInfoService.getAllChildByParent(id);
     }
 
 
