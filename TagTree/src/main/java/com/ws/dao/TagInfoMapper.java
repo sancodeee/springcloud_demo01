@@ -15,6 +15,12 @@ public interface TagInfoMapper extends BaseMapper<TagInfo> {
     @Select("select * from sc_tag_info where parent_id = #{parentId} order by sort_num")
     List<TagInfo> getTagInfoByParent(@Param("parentId") Long parentId);
 
-    List<TagInfoVO> getAllChildByParent(@Param("parentId") Long parentId);
+    /**
+     * 递归查询该id标签下所有子标签
+     *
+     * @param id
+     * @return
+     */
+    List<TagInfoVO> getAllChildByParent(@Param("id") Long id);
 
 }

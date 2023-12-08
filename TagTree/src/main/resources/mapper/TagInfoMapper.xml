@@ -3,14 +3,17 @@
 <mapper namespace="com.ws.dao.TagInfoMapper">
 
     <select id="getAllChildByParent" resultType="com.ws.vo.TagInfoVO" parameterType="long">
-        with recursive t1 as (select *
-                              from sc_tag_info p
-                              where id = #{id}
-                              union all
-                              select t.*
-                              from sc_tag_info t
-                                       inner join t1 on t1.id = t.parent_id)
-        select *
-        from t1
+        WITH RECURSIVE temp AS (SELECT t.*
+                                FROM sc_tag_info t
+                                WHERE id = #{id}
+
+                                UNION ALL
+
+                                SELECT t1.*
+                                FROM sc_tag_info t1
+                                         INNER JOIN temp ON temp.id = t1.parent_id)
+        SELECT *
+        FROM temp;
     </select>
+
 </mapper>

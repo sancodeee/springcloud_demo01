@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ws.dao.TagInfoMapper;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
+import com.ws.vo.TagInfoVO;
 import com.ws.vo.TagInfoVO2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -52,6 +53,7 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
 
     /**
      * 根据id查询该标签下所有子标签
+     * 该方法非递归的方式，只查了两个层级
      *
      * @param parentId Long
      * @return List<TagInfoVO>
@@ -75,4 +77,18 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
         }
         return tagInfoVO2s;
     }
+
+    /**
+     * 递归查询所有该标签下的所有子标签
+     *
+     * @param id Long
+     * @return List<TagInfoVO>
+     */
+    public List<TagInfoVO> getAllChildByParRecursive(Long id) {
+        // 递归查询该子节点
+        List<TagInfoVO> allChildNodes = tagInfoMapper.getAllChildByParent(id);
+
+        return null;
+    }
+
 }
