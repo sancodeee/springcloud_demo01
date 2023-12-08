@@ -32,18 +32,18 @@ public class TagInfoController {
     }
 
     /**
-     * 根据父标签id获取子标签
+     * 根据标签id获取该标签的子标签
      *
-     * @param parentId Long
+     * @param id Long
      * @return List<TagInfo>
      */
     @GetMapping(value = "/getByParent")
-    public List<TagInfo> getTagInfoByParent(@RequestParam(value = "parentId") Long parentId) {
-        return tagInfoService.getTagInfoByParent(parentId);
+    public List<TagInfo> getTagInfoByParent(@RequestParam(value = "id") Long id) {
+        return tagInfoService.getTagInfoByParent(id);
     }
 
     @GetMapping(value = "/getAllChildByParent")
-    public List<TagInfoVO> getAllChildByParent(@RequestParam(value = "parentId") Long parentId) {
+    public List<TagInfoVO> getAllChildByParent(@RequestParam(value = "id") Long id) {
         return null;
     }
 
