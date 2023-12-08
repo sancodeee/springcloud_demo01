@@ -39,8 +39,8 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
     /**
      * 根据id查询下层子标签
      *
-     * @param parentId
-     * @return
+     * @param parentId Long
+     * @return List<TagInfo>
      */
     @Override
     public List<TagInfo> getTagInfoByParent(Long parentId) {
