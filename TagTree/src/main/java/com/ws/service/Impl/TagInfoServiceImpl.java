@@ -7,7 +7,6 @@ import com.ws.service.TagInfoService;
 import com.ws.vo.TagInfoVO;
 import com.ws.vo.TagInfoVO2;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,15 +73,15 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
      * 根据id查询该标签下所有子标签
      * 该方法非递归的方式，只查了两个层级
      *
-     * @param parentId parentId
+     * @param id id
      * @return {@link List}<{@link TagInfoVO2}>
      */
     @Override
-    public List<TagInfoVO2> getAllChildByParent(Long parentId) {
+    public List<TagInfoVO2> getAllChildByParent(Long id) {
         // 返回所有子标签信息
         List<TagInfoVO2> tagInfoVO2s = new ArrayList<>();
         // 查出该标签下的一级子标签
-        List<TagInfo> tagInfos = tagInfoMapper.getTagInfoByParent(parentId);
+        List<TagInfo> tagInfos = tagInfoMapper.getTagInfoByParent(id);
         // 根据一级子标签查询二级子标签
         for (TagInfo tagInfo : tagInfos) {
             TagInfoVO2 tagInfoVO2 = new TagInfoVO2();
