@@ -67,7 +67,7 @@ public class TagInfoController {
      * @param id id
      * @return {@link List}<{@link TagInfoVO2}>
      */
-    @GetMapping(value = "/getAllChildByParent")
+    @GetMapping(value = "/getAllChildByParent2")
     public List<TagInfoVO> getAllChildByParent2(@RequestParam(value = "id") Long id) {
         return tagInfoService.getAllChildByParRecursive(id);
     }
