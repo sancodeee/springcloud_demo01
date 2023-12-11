@@ -28,6 +28,6 @@ public interface TagInfoMapper extends BaseMapper<TagInfo> {
      * @param id id
      * @return {@link List}<{@link TagInfoVO}>
      */
-    List<TagInfoVO> getAllChildByParent(@Param("id") Long id);
+    List<TagInfoVO> getAllChildByParent2(@Param("id") Long id);
 
 }

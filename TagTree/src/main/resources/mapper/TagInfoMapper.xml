@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ws.dao.TagInfoMapper">
 
-    <select id="getAllChildByParent" resultType="com.ws.vo.TagInfoVO" parameterType="long">
+    <select id="getAllChildByParent2" resultType="com.ws.vo.TagInfoVO" parameterType="Long">
         WITH RECURSIVE temp AS (SELECT t.*
                                 FROM sc_tag_info t
                                 WHERE id = #{id}

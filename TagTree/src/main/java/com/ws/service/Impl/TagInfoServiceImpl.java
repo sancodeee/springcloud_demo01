@@ -7,6 +7,7 @@ import com.ws.service.TagInfoService;
 import com.ws.vo.TagInfoVO;
 import com.ws.vo.TagInfoVO2;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -105,25 +106,26 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
      */
     public List<TagInfoVO> getAllChildByParRecursive(Long id) {
         // 递归查询所有标签
-        List<TagInfoVO> allChildNodes = tagInfoMapper.getAllChildByParent(id);
+        List<TagInfoVO> allChildNodes = tagInfoMapper.getAllChildByParent2(id);
         // 排除父节点后，将信息存入map方便后续使用
         // 指定了如果存入相同的key时如何处理冲突
         Map<Long, TagInfoVO> mapTemp = allChildNodes.stream().filter(node -> !id.equals(node.getId()))
                 .collect(Collectors.toMap(TagInfo::getId, tagInfoVO -> tagInfoVO, (key1, key2) -> key2));
         List<TagInfoVO> tagVoList = new ArrayList<>();
         // 遍历每个元素，排除根节点
-        allChildNodes.stream().filter(node -> !id.equals(node.getId())).forEach(item -> {
-            // 传入的id是父节点id
-            if (item.getParentId().equals(id)) {
-                tagVoList.add(item);
+        allChildNodes.stream().filter(node -> !id.equals(node.getId())).forEach(tagInfoVO -> {
+            // 如果某条数据的pid是传入的id，则放到返回的集合中
+            // 如果该数据的pid不是传入的id，那就找到其父节点，并将这个数据add到其父节点的List<TreeVo> childrenTreeNodes;
+            if (tagInfoVO.getParentId().equals(id)) {
+                tagVoList.add(tagInfoVO);
             }
             // 找到当前节点的父节点
-            TagInfoVO tagInfoVO = mapTemp.get(item.getParentId());
-            if (tagInfoVO != null) {
-                if (tagInfoVO.getChildNodes() == null) {
-                    tagInfoVO.setChildNodes(new ArrayList<TagInfoVO>());
+            TagInfoVO tagInfoVoPar = mapTemp.get(tagInfoVO.getParentId());
+            if (tagInfoVoPar != null) {
+                if (tagInfoVoPar.getChildNodes() == null) {
+                    tagInfoVoPar.setChildNodes(new ArrayList<TagInfoVO>());
                 }
-                tagInfoVO.getChildNodes().add(item);
+                tagInfoVoPar.getChildNodes().add(tagInfoVO);
             }
         });
         return tagVoList;
