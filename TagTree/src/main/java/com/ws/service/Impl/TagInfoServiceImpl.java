@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 
 
 /**
+ * 标签信息服务实现
+ *
  * @author wangsen_a
  * @date 2023/12/11
  */
@@ -106,8 +108,7 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
         List<TagInfoVO> allChildNodes = tagInfoMapper.getAllChildByParent(id);
         // 排除父节点后，将信息存入map方便后续使用
         // 指定了如果存入相同的key时如何处理冲突
-        Map<Long, TagInfoVO> mapTemp = allChildNodes.stream().filter(node -> !id.equals(node.getId()))
-                .collect(Collectors.toMap(TagInfo::getId, value -> value, (key1, key2) -> key2));
+        Map<Long, TagInfoVO> mapTemp = allChildNodes.stream().filter(node -> !id.equals(node.getId())).collect(Collectors.toMap(TagInfo::getId, value -> value, (key1, key2) -> key2));
         List<TagInfoVO> tagVoList = new ArrayList<>();
         // 遍历每个元素，排除根节点
         allChildNodes.stream().filter(node -> !id.equals(node.getId())).forEach(item -> {
