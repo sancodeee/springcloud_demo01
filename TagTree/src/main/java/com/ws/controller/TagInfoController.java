@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
+ * 标签信息控制器
+ *
  * @author wangsen
  * @date 2023/12/09
  */
