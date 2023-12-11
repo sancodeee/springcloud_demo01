@@ -12,14 +12,21 @@ import java.util.List;
 @Mapper
 public interface TagInfoMapper extends BaseMapper<TagInfo> {
 
+    /**
+     * 通过父级获取标签信息
+     *
+     * @param parentId 父id
+     * @return {@link List}<{@link TagInfo}>
+     */
     @Select("select * from sc_tag_info where parent_id = #{parentId} order by sort_num")
     List<TagInfo> getTagInfoByParent(@Param("parentId") Long parentId);
 
+
     /**
-     * 递归查询该id标签下所有子标签
+     * 查询该标签下所有子标签
      *
-     * @param id
-     * @return
+     * @param id id
+     * @return {@link List}<{@link TagInfoVO}>
      */
     List<TagInfoVO> getAllChildByParent(@Param("id") Long id);
 
