@@ -15,7 +15,14 @@ import org.springframework.util.ObjectUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+
+/**
+ * @author wangsen_a
+ * @date 2023/12/11
+ */
 @Slf4j
 @Service
 public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> implements TagInfoService {
@@ -23,6 +30,13 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
     @Autowired
     private TagInfoMapper tagInfoMapper;
 
+
+    /**
+     * 添加标签信息
+     *
+     * @param tagInfo 标签信息
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean addTagInfo(TagInfo tagInfo) {
         if (!ObjectUtils.isEmpty(tagInfo)) {
@@ -36,11 +50,12 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
         return false;
     }
 
+
     /**
-     * 根据id查询下层子标签
+     * 按父级id获取子标签信息
      *
-     * @param parentId Long
-     * @return List<TagInfo>
+     * @param parentId 父主键id
+     * @return {@link List}<{@link TagInfo}>
      */
     @Override
     public List<TagInfo> getTagInfoByParent(Long parentId) {
@@ -51,12 +66,13 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
         return tagInfoMapper.getTagInfoByParent(parentId);
     }
 
+
     /**
      * 根据id查询该标签下所有子标签
      * 该方法非递归的方式，只查了两个层级
      *
-     * @param parentId Long
-     * @return List<TagInfoVO>
+     * @param parentId parentId
+     * @return {@link List}<{@link TagInfoVO2}>
      */
     @Override
     public List<TagInfoVO2> getAllChildByParent(Long parentId) {
@@ -78,17 +94,36 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
         return tagInfoVO2s;
     }
 
+
     /**
-     * 递归查询所有该标签下的所有子标签
+     * 逐段递归获取所有子标签
      *
-     * @param id Long
-     * @return List<TagInfoVO>
+     * @param id 主键id
+     * @return {@link List}<{@link TagInfoVO}>
      */
     public List<TagInfoVO> getAllChildByParRecursive(Long id) {
-        // 递归查询该子节点
+        // 递归查询所有标签
         List<TagInfoVO> allChildNodes = tagInfoMapper.getAllChildByParent(id);
-
-        return null;
+        // 排除父节点后，将信息存入map方便后续使用
+        // 指定了如果存入相同的key时如何处理冲突
+        Map<Long, TagInfoVO> mapTemp = allChildNodes.stream().filter(node -> !id.equals(node.getId()))
+                .collect(Collectors.toMap(key -> key.getId(), value -> value, (key1, key2) -> key2));
+        List<TagInfoVO> tagVoList = new ArrayList<>();
+        // 遍历每个元素，排除根节点
+        allChildNodes.stream().filter(node -> !id.equals(node.getId())).forEach(item -> {
+            // 传入的id是父节点id
+            if (item.getParentId().equals(id)) {
+                tagVoList.add(item);
+            }
+            // 找到当前节点的父节点
+            TagInfoVO tagInfoVO = mapTemp.get(item.getParentId());
+            if (tagInfoVO != null) {
+                if (tagInfoVO.getChildNodes() == null) {
+                    tagInfoVO.setChildNodes(new ArrayList<TagInfoVO>());
+                }
+                tagInfoVO.getChildNodes().add(item);
+            }
+        });
+        return tagVoList;
     }
-
 }

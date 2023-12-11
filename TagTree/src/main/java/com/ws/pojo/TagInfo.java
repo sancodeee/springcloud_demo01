@@ -12,8 +12,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+
 /**
- * tagInfo实体类
+ * 标签信息实体
+ *
+ * @author wangsen_a
+ * @date 2023/12/11
  */
 @Data
 @AllArgsConstructor
@@ -28,10 +32,12 @@ public class TagInfo {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
+
     /**
      * 标签名称
      */
     private String tagName;
+
 
     /**
      * 父节点id
@@ -46,7 +52,7 @@ public class TagInfo {
     private LocalDateTime createTime;
 
     /**
-     * 创建人
+     * 创建者
      */
     private String creator;
 
@@ -58,7 +64,7 @@ public class TagInfo {
     private LocalDateTime updateTime;
 
     /**
-     * 更新人
+     * 更新者
      */
     private String updater;
 
@@ -68,7 +74,7 @@ public class TagInfo {
     private Integer isDeleted;
 
     /**
-     * 排序字段
+     * 排序编号
      */
     private Integer sortNum;
 
