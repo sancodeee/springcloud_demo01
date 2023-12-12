@@ -1,5 +1,6 @@
 package com.ws.controller;
 
+import com.ws.common.Result;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
 import com.ws.vo.TagInfoVO;
@@ -34,9 +35,12 @@ public class TagInfoController {
      * @return {@link Boolean}
      */
     @PostMapping(value = "/add")
-    public Boolean addTagInfo(@RequestBody TagInfo tagInfo, BindingResult result) {
+    public Result<?> addTagInfo(@RequestBody TagInfo tagInfo, BindingResult result) {
         log.info("校验结果：{}", result.getAllErrors());
-        return tagInfoService.addTagInfo(tagInfo);
+        if (!tagInfoService.addTagInfo(tagInfo)) {
+            return Result.FAIL();
+        }
+        return Result.SUCCESS();
     }
 
 
@@ -47,8 +51,12 @@ public class TagInfoController {
      * @return {@link List}<{@link TagInfo}>
      */
     @GetMapping(value = "/getByParent")
-    public List<TagInfo> getTagInfoByParent(@RequestParam(value = "id") Long id) {
-        return tagInfoService.getTagInfoByParent(id);
+    public Result<List<TagInfo>> getTagInfoByParent(@RequestParam(value = "id") Long id) {
+        List<TagInfo> tagInfos = tagInfoService.getTagInfoByParent(id);
+        if (tagInfos.isEmpty()) {
+            return Result.SUCCESS("查询不到数据");
+        }
+        return Result.SUCCESS(tagInfos);
     }
 
 
@@ -59,8 +67,12 @@ public class TagInfoController {
      * @return {@link List}<{@link TagInfoVO2}>
      */
     @GetMapping(value = "/getAllChildByParent")
-    public List<TagInfoVO2> getAllChildByParent(@RequestParam(value = "id") Long id) {
-        return tagInfoService.getAllChildByParent(id);
+    public Result<List<TagInfoVO2>> getAllChildByParent(@RequestParam(value = "id") Long id) {
+        List<TagInfoVO2> allChildList = tagInfoService.getAllChildByParent(id);
+        if (allChildList.isEmpty()) {
+            return Result.SUCCESS("查询不到数据信息");
+        }
+        return Result.SUCCESS(allChildList);
     }
 
     /**
@@ -70,8 +82,12 @@ public class TagInfoController {
      * @return {@link List}<{@link TagInfoVO2}>
      */
     @GetMapping(value = "/getAllChildByParent2")
-    public List<TagInfoVO> getAllChildByParent2(@RequestParam(value = "id") Long id) {
-        return tagInfoService.getAllChildByParRecursive(id);
+    public Result<List<TagInfoVO>> getAllChildByParent2(@RequestParam(value = "id") Long id) {
+        List<TagInfoVO> tagInfoVOS = tagInfoService.getAllChildByParRecursive(id);
+        if (tagInfoVOS.isEmpty()) {
+            return Result.SUCCESS("查询不到数据");
+        }
+        return Result.SUCCESS(tagInfoVOS);
     }
 
 
