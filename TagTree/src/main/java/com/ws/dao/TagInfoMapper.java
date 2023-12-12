@@ -9,6 +9,12 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * 标签信息映射器
+ *
+ * @author wangsen_a
+ * @date 2023/12/12
+ */
 @Mapper
 public interface TagInfoMapper extends BaseMapper<TagInfo> {
 
