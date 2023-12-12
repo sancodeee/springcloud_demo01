@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 
@@ -28,7 +28,6 @@ public class TagInfo {
     /**
      * 主键id
      */
-    @NotNull
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
@@ -36,6 +35,7 @@ public class TagInfo {
     /**
      * 标签名称
      */
+    @NotBlank(message = "标签名称不能为空")
     private String tagName;
 
 

@@ -1,5 +1,6 @@
 package com.ws.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ws.dao.TagInfoMapper;
 import com.ws.pojo.TagInfo;
@@ -11,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,6 +52,27 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
         }
         log.info("入参为空");
         return false;
+    }
+
+
+    /**
+     * 验证添加标签
+     *
+     * @param tagInfo 标签信息实体
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean verifyAddTag(TagInfo tagInfo) {
+        // 校验规则：同级不能有同名的标签
+        LambdaQueryWrapper<TagInfo> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(TagInfo::getParentId, tagInfo.getParentId());
+        List<TagInfo> tagInfos = tagInfoMapper.selectList(wrapper);
+        boolean b = tagInfos.stream().anyMatch(otherTag -> tagInfo.getTagName().equals(otherTag.getTagName()));
+        // 如果同级存在同名标签，则校验不通过
+        if (b) {
+            return false;
+        }
+        return true;
     }
 
 

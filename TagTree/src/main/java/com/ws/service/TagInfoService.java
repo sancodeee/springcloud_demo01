@@ -24,6 +24,14 @@ public interface TagInfoService extends IService<TagInfo> {
     Boolean addTagInfo(TagInfo tagInfo);
 
     /**
+     * 验证添加标签
+     *
+     * @param tagInfo 标签信息
+     * @return {@link Boolean}
+     */
+    Boolean verifyAddTag(TagInfo tagInfo);
+
+    /**
      * 通过父id获取一级子标签信息
      *
      * @param parentId 父id

@@ -8,6 +8,8 @@ import com.ws.vo.TagInfoVO2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,8 +37,15 @@ public class TagInfoController {
      * @return {@link Boolean}
      */
     @PostMapping(value = "/add")
-    public Result<?> addTagInfo(@RequestBody TagInfo tagInfo, BindingResult result) {
-        log.info("校验结果：{}", result.getAllErrors());
+    public Result<?> addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
+        List<ObjectError> allErrors = result.getAllErrors();
+        log.info("校验信息：{}", allErrors);
+        if (!allErrors.isEmpty()) {
+            return Result.FAIL(allErrors.get(0).getDefaultMessage());
+        }
+        if (!tagInfoService.verifyAddTag(tagInfo)) {
+            return Result.FAIL("同级不能添加同名标签");
+        }
         if (!tagInfoService.addTagInfo(tagInfo)) {
             return Result.FAIL();
         }
@@ -54,7 +63,7 @@ public class TagInfoController {
     public Result<List<TagInfo>> getTagInfoByParent(@RequestParam(value = "id") Long id) {
         List<TagInfo> tagInfos = tagInfoService.getTagInfoByParent(id);
         if (tagInfos.isEmpty()) {
-            return Result.SUCCESS("查询不到数据");
+            return Result.FAIL("查询不到数据");
         }
         return Result.SUCCESS(tagInfos);
     }
@@ -70,7 +79,7 @@ public class TagInfoController {
     public Result<List<TagInfoVO2>> getAllChildByParent(@RequestParam(value = "id") Long id) {
         List<TagInfoVO2> allChildList = tagInfoService.getAllChildByParent(id);
         if (allChildList.isEmpty()) {
-            return Result.SUCCESS("查询不到数据信息");
+            return Result.FAIL("查询不到数据信息");
         }
         return Result.SUCCESS(allChildList);
     }
@@ -85,7 +94,7 @@ public class TagInfoController {
     public Result<List<TagInfoVO>> getAllChildByParent2(@RequestParam(value = "id") Long id) {
         List<TagInfoVO> tagInfoVOS = tagInfoService.getAllChildByParRecursive(id);
         if (tagInfoVOS.isEmpty()) {
-            return Result.SUCCESS("查询不到数据");
+            return Result.FAIL("查询不到数据");
         }
         return Result.SUCCESS(tagInfoVOS);
     }
