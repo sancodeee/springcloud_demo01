@@ -32,9 +32,9 @@ public class TagInfoController {
     /**
      * 添加标签信息
      *
-     * @param tagInfo
-     * @param result
-     * @return {@link Boolean}
+     * @param tagInfo 标签信息
+     * @param result  结果
+     * @return {@link Result}<{@link ?}>
      */
     @PostMapping(value = "/add")
     public Result<?> addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
@@ -52,12 +52,11 @@ public class TagInfoController {
         return Result.SUCCESS();
     }
 
-
     /**
      * 根据标签id获取该标签的子标签
      *
-     * @param id 主键id
-     * @return {@link List}<{@link TagInfo}>
+     * @param id id
+     * @return {@link Result}<{@link List}<{@link TagInfo}>>
      */
     @GetMapping(value = "/getByParent")
     public Result<List<TagInfo>> getTagInfoByParent(@RequestParam(value = "id") Long id) {
@@ -72,8 +71,8 @@ public class TagInfoController {
     /**
      * 根据标签id查询所有子标签
      *
-     * @param id 主键id
-     * @return {@link List}<{@link TagInfoVO2}>
+     * @param id id
+     * @return {@link Result}<{@link List}<{@link TagInfoVO2}>>
      */
     @GetMapping(value = "/getAllChildByParent")
     public Result<List<TagInfoVO2>> getAllChildByParent(@RequestParam(value = "id") Long id) {
@@ -84,11 +83,12 @@ public class TagInfoController {
         return Result.SUCCESS(allChildList);
     }
 
+
     /**
      * 递归方式获取该标签下所有子标签
      *
      * @param id id
-     * @return {@link List}<{@link TagInfoVO2}>
+     * @return {@link Result}<{@link List}<{@link TagInfoVO}>>
      */
     @GetMapping(value = "/getAllChildByParent2")
     public Result<List<TagInfoVO>> getAllChildByParent2(@RequestParam(value = "id") Long id) {
