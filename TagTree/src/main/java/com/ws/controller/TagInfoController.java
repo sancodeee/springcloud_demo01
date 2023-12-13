@@ -1,6 +1,5 @@
 package com.ws.controller;
 
-import com.ws.common.HttpStatusCode;
 import com.ws.common.Result;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
