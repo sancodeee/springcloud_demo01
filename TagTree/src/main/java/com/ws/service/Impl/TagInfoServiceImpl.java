@@ -2,6 +2,7 @@ package com.ws.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ws.common.Result;
 import com.ws.dao.TagInfoMapper;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
@@ -40,27 +41,33 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
      * @return {@link Boolean}
      */
     @Override
-    public Boolean addTagInfo(TagInfo tagInfo) {
-        if (!ObjectUtils.isEmpty(tagInfo)) {
-            if (this.save(tagInfo)) {
-                log.info("插入成功");
-                return true;
+    public Result<?> addTagInfo(TagInfo tagInfo) {
+        // 获取校验结果
+        Result<?> verifiedResult = verifyAddTag(tagInfo);
+        if (verifiedResult.getIsSucceed()) {
+            if (!ObjectUtils.isEmpty(tagInfo)) {
+                if (this.save(tagInfo)) {
+                    return Result.SUCCESS("插入成功");
+                }
+                return Result.FAIL("插入失败");
             }
-            return false;
+            return Result.FAIL("入参为空");
         }
-        log.info("入参为空");
-        return false;
+        return verifiedResult;
     }
 
 
     /**
-     * 验证添加标签
+     * 标签内容校验
      *
      * @param tagInfo 标签信息实体
      * @return {@link Boolean}
      */
     @Override
-    public Boolean verifyAddTag(TagInfo tagInfo) {
+    public Result<?> verifyAddTag(TagInfo tagInfo) {
+        if (tagInfo.getParentId() == null) {
+            return Result.FAIL("父标签id为空");
+        }
         // 校验规则：同级不能有同名的标签
         LambdaQueryWrapper<TagInfo> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(TagInfo::getParentId, tagInfo.getParentId());
@@ -68,9 +75,9 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
         boolean b = tagInfos.stream().anyMatch(otherTag -> tagInfo.getTagName().equals(otherTag.getTagName()));
         // 如果同级存在同名标签，则校验不通过
         if (b) {
-            return false;
+            return Result.FAIL("同级目录下该标签已存在");
         }
-        return true;
+        return Result.SUCCESS();
     }
 
 

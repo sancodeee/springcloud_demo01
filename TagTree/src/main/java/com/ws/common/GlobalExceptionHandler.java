@@ -25,6 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public Result<?> ExceptionHandler(Exception e) {
         log.error("出现异常：{}", e.toString());
+        e.printStackTrace();
         return Result.FAIL("服务器出现未知错误");
     }
 
@@ -37,6 +38,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = UnexpectedTypeException.class)
     public Result<?> UnexpectedTypeExceptionHandler(Exception e) {
         log.error("出现异常：{}", e.toString());
+        e.printStackTrace();
         return Result.FAIL("服务器错误：数据校验异常");
     }
 
@@ -49,6 +51,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = NullPointerException.class)
     public Result<?> NullPointerExceptionHandler(Exception e) {
         log.error("出现异常：{}", e.toString());
+        e.printStackTrace();
         return Result.FAIL("服务器错误：空指针异常");
     }
 

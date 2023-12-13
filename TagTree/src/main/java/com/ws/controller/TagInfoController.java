@@ -41,20 +41,15 @@ public class TagInfoController {
      */
     @PostMapping(value = "/add")
     public Result<?> addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
+        // 入参校验
         List<ObjectError> allErrors = result.getAllErrors();
-        log.info("校验信息：{}", allErrors);
+        log.info("入参校验信息：{}", allErrors);
         if (!allErrors.isEmpty()) {
             // 校验信息返回
             String errMsgs = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("；"));
             return Result.FAIL(errMsgs);
         }
-        if (!tagInfoService.verifyAddTag(tagInfo)) {
-            return Result.FAIL("同级不能添加同名标签");
-        }
-        if (!tagInfoService.addTagInfo(tagInfo)) {
-            return Result.FAIL();
-        }
-        return Result.SUCCESS();
+        return tagInfoService.addTagInfo(tagInfo);
     }
 
     /**

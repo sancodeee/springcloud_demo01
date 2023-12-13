@@ -1,6 +1,7 @@
 package com.ws.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ws.common.Result;
 import com.ws.pojo.TagInfo;
 import com.ws.vo.TagInfoVO;
 import com.ws.vo.TagInfoVO2;
@@ -21,15 +22,15 @@ public interface TagInfoService extends IService<TagInfo> {
      * @param tagInfo 标签信息
      * @return {@link Boolean}
      */
-    Boolean addTagInfo(TagInfo tagInfo);
+    Result<?> addTagInfo(TagInfo tagInfo);
 
     /**
-     * 验证添加标签
+     * 标签内容校验
      *
      * @param tagInfo 标签信息
      * @return {@link Boolean}
      */
-    Boolean verifyAddTag(TagInfo tagInfo);
+    Result<?> verifyAddTag(TagInfo tagInfo);
 
     /**
      * 通过父id获取一级子标签信息
