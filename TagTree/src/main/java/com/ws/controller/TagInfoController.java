@@ -1,10 +1,12 @@
 package com.ws.controller;
 
+import com.ws.common.HttpStatusCode;
 import com.ws.common.Result;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
 import com.ws.vo.TagInfoVO;
 import com.ws.vo.TagInfoVO2;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 标签信息控制器
@@ -21,6 +24,7 @@ import java.util.List;
  * @date 2023/12/09
  */
 @Slf4j
+@Accessors(chain = true)
 @RestController
 @RequestMapping(value = "/tagInfo")
 public class TagInfoController {
@@ -41,7 +45,9 @@ public class TagInfoController {
         List<ObjectError> allErrors = result.getAllErrors();
         log.info("校验信息：{}", allErrors);
         if (!allErrors.isEmpty()) {
-            return Result.FAIL(allErrors.get(0).getDefaultMessage());
+            // 校验信息返回
+            String errMsgs = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("；"));
+            return Result.FAIL(errMsgs);
         }
         if (!tagInfoService.verifyAddTag(tagInfo)) {
             return Result.FAIL("同级不能添加同名标签");
