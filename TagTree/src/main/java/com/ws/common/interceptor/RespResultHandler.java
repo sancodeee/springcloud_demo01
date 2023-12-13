@@ -45,7 +45,8 @@ public class RespResultHandler implements ResponseBodyAdvice<Object> {
         HttpServletRequest request = requestAttributes.getRequest();
         // 判断请求中是否有标记字段RESPONSE_RESULTVO_ATTR, 如果有则返回true，否则返回false
         RespResult respResult = (RespResult) request.getAttribute(RESPONSE_RESULTVO_ATTR);
-        return respResult != null;
+        boolean b = respResult != null ? true : false;
+        return b;
     }
 
     @SneakyThrows
@@ -57,7 +58,7 @@ public class RespResultHandler implements ResponseBodyAdvice<Object> {
             return (RespResult) body;
         } else if (body instanceof Result) {
             return body;
-            // 如果返回的是Sting类型
+            // 如果返回的是Sting类型，则做封装
         } else if (body instanceof String) {
             return objectMapper.writeValueAsString(Result.SUCCESS(body));
         }

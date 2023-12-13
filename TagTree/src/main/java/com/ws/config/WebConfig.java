@@ -20,6 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
      *
      * @param registry 注册表
      */
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //ResponseResultVO拦截器
         RespResultInterceptor respResultInterceptor = new RespResultInterceptor();

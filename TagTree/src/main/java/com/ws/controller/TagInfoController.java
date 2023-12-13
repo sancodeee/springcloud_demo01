@@ -1,6 +1,7 @@
 package com.ws.controller;
 
 import com.ws.common.Result;
+import com.ws.common.interceptor.RespResult;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
 import com.ws.vo.TagInfoVO;
@@ -39,17 +40,21 @@ public class TagInfoController {
      * @param result  结果
      * @return {@link Result}<{@link ?}>
      */
+    //测试自定义注解能否使用
+    @RespResult
     @PostMapping(value = "/add")
-    public Result<?> addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
+    public String addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
         // 入参校验
         List<ObjectError> allErrors = result.getAllErrors();
         log.info("入参校验信息：{}", allErrors);
         if (!allErrors.isEmpty()) {
             // 校验信息返回
             String errMsgs = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("；"));
-            return Result.FAIL(errMsgs);
+            // return Result.FAIL(errMsgs);
+            return errMsgs;
         }
-        return tagInfoService.addTagInfo(tagInfo);
+        // return tagInfoService.addTagInfo(tagInfo);
+        return "true";
     }
 
     /**
