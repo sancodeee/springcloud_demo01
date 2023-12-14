@@ -1,0 +1,12 @@
+#该配置文件优先级高于applicaton.yml, 是引导文件，引导本服务去nacos读取具体的某个配置文件
+spring:
+  application:
+    name: tagInfoService
+  profiles:
+    active: dev #开发环境是dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848 #nacos服务器地址
+        file-extension: yaml
+        namespace: 3d077be2-bf3b-444c-aa09-4404b0e5f98c #如果不加该配置，默认会去public中找配置文件

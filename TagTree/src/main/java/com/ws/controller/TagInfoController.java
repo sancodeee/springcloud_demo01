@@ -9,6 +9,8 @@ import com.ws.vo.TagInfoVO2;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
  * @date 2023/12/09
  */
 @Slf4j
+@RefreshScope
 @Accessors(chain = true)
 @RestController
 @RequestMapping(value = "/tagInfo")
@@ -31,6 +34,9 @@ public class TagInfoController {
 
     @Autowired
     private TagInfoService tagInfoService;
+
+    @Value("${tagInfo.name}")
+    private String name;
 
 
     /**
@@ -44,6 +50,7 @@ public class TagInfoController {
     @RespResult
     @PostMapping(value = "/add")
     public String addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
+        log.info("nacos服务器中配置文件的值：{}", name);
         // 入参校验
         List<ObjectError> allErrors = result.getAllErrors();
         log.info("入参校验信息：{}", allErrors);
