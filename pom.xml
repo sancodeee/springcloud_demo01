@@ -11,39 +11,67 @@
     <modules>
         <module>TagTree</module>
     </modules>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-cloud-dependencies.version>Greenwich.RELEASE</spring-cloud-dependencies.version>
-    </properties>
-    <!-- springboot版本 -->
+    <!-- spring boot版本 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.5.RELEASE</version>
     </parent>
 
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- spring cloud版本 -->
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <!-- spring cloud alibaba版本 -->
+        <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
-            <!-- springcloud -->
+            <!-- spring-cloud-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-dependencies.version}</version>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring-cloud-alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <!--    确定spring cloud私有仓库    -->
+    <!-- 定义maven下载依赖地址 优先级高于settings文件中配置的mirrors -->
     <repositories>
+        <!--    确定spring cloud私有仓库    -->
         <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun Repository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>jeecg</id>
+            <name>jeecg Repository</name>
+            <url>http://maven.jeecg.org/nexus/content/repositories/jeecg</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

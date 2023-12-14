@@ -1,16 +1,25 @@
 server:
   port: 8080
+
 spring:
+  application:
+    name: tagInfo-service
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
       username: root
       password: 169167866Spl.
       driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr:
 
 mybatis-plus:
   global-config:
     db-config:
       id-type: auto
   configuration:
+    #控制台打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
