@@ -30,8 +30,12 @@ import java.util.stream.Collectors;
 @Service
 public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> implements TagInfoService {
 
+    private final TagInfoMapper tagInfoMapper;
+
     @Autowired
-    private TagInfoMapper tagInfoMapper;
+    public TagInfoServiceImpl(TagInfoMapper tagInfoMapper) {
+        this.tagInfoMapper = tagInfoMapper;
+    }
 
 
     /**

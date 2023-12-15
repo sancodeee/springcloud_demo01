@@ -2,6 +2,7 @@ package com.ws.controller;
 
 import com.ws.common.Result;
 import com.ws.common.interceptor.RespResult;
+import com.ws.dao.TagInfoMapper;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
 import com.ws.vo.TagInfoVO;
@@ -32,8 +33,14 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/tagInfo")
 public class TagInfoController {
 
+    private final TagInfoService tagInfoService;
+    private final TagInfoMapper tagInfoMapper;
+
     @Autowired
-    private TagInfoService tagInfoService;
+    public TagInfoController(TagInfoService tagInfoService, TagInfoMapper tagInfoMapper){
+        this.tagInfoService = tagInfoService;
+        this.tagInfoMapper = tagInfoMapper;
+    }
 
     @Value("${tagInfo.name}")
     private String name;
@@ -118,6 +125,7 @@ public class TagInfoController {
     @GetMapping(value = "/customAnnotation")
     public List<TagInfoVO> customAnnotationTest() {
         Result<List<TagInfoVO>> result = this.getAllChildByParent2(Long.valueOf(1));
+        tagInfoMapper.getTagInfoByParent(Long.valueOf(1));
         return result.getData();
     }
 
