@@ -37,7 +37,7 @@ public class TagInfoController {
     private final TagInfoMapper tagInfoMapper;
 
     @Autowired
-    public TagInfoController(TagInfoService tagInfoService, TagInfoMapper tagInfoMapper){
+    public TagInfoController(TagInfoService tagInfoService, TagInfoMapper tagInfoMapper) {
         this.tagInfoService = tagInfoService;
         this.tagInfoMapper = tagInfoMapper;
     }
