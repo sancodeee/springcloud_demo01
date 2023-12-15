@@ -31,11 +31,14 @@ public class RespResultInterceptor implements HandlerInterceptor {
      * @throws Exception 异常
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // HandlerMethod是处理请求方法的元数据的类
         if (handler instanceof HandlerMethod) {
             final HandlerMethod handlerMethod = (HandlerMethod) handler;
+            // 获取controller的bean对象
             final Class<?> clazz = handlerMethod.getBeanType();
+            // 获取controller中的方法对象
             final Method method = handlerMethod.getMethod();
-            // 判断是否在类对象上添加了注解，如果添加了该注解，就将RESPONSE_RESULT_ATTR添加到请求属性字段中
+            // 判断是否在类上添加了注解，如果添加了该注解，就将RESPONSE_RESULT_ATTR添加到请求属性字段中
             if (clazz.isAnnotationPresent(RespResult.class)) {
                 // 设置属性，值为该注解
                 request.setAttribute(RESPONSE_RESULT_ATTR, clazz.getAnnotation(RespResult.class));
