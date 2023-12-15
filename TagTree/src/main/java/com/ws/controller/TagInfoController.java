@@ -116,10 +116,9 @@ public class TagInfoController {
      */
     @RespResult
     @GetMapping(value = "/customAnnotation")
-    public List<?> customAnnotationTest(){
+    public List<TagInfoVO> customAnnotationTest() {
         Result<List<TagInfoVO>> result = this.getAllChildByParent2(Long.valueOf(1));
-        List<TagInfoVO> list = result.getData();
-        return list;
+        return result.getData();
     }
 
 
