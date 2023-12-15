@@ -72,11 +72,8 @@ public class RespResultHandler implements ResponseBodyAdvice<Object> {
                                   Class<? extends HttpMessageConverter<?>> converterType, ServerHttpRequest request,
                                   ServerHttpResponse response) {
         // object为controller的返回值对象
-        if (object instanceof RespResult) {
-            return (RespResult) object;
-        } else if (object instanceof Result) {
+        if (object instanceof Result) {
             return object;
-            // 如果返回的是Sting类型，则做封装
         } else if (object instanceof String) {
             return objectMapper.writeValueAsString(Result.SUCCESS(object));
         }
