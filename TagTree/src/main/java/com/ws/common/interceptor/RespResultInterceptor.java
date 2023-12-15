@@ -18,7 +18,7 @@ public class RespResultInterceptor implements HandlerInterceptor {
     /**
      * 用于记录是否标注了RespResult注解
      */
-    public static final String RESPONSE_RESULTVO_ATTR = "RESPONSE_RESULTVO_ATTR";
+    public static final String RESPONSE_RESULT_ATTR = "RESPONSE_RESULT_ATTR";
 
 
     /**
@@ -35,13 +35,13 @@ public class RespResultInterceptor implements HandlerInterceptor {
             final HandlerMethod handlerMethod = (HandlerMethod) handler;
             final Class<?> clazz = handlerMethod.getBeanType();
             final Method method = handlerMethod.getMethod();
-            // 判断是否在类对象上添加了注解，如果添加了该注解，就将RESPONSE_RESULTVO_ATTR添加到请求属性字段中
+            // 判断是否在类对象上添加了注解，如果添加了该注解，就将RESPONSE_RESULT_ATTR添加到请求属性字段中
             if (clazz.isAnnotationPresent(RespResult.class)) {
                 // 设置属性，值为该注解
-                request.setAttribute(RESPONSE_RESULTVO_ATTR, clazz.getAnnotation(RespResult.class));
+                request.setAttribute(RESPONSE_RESULT_ATTR, clazz.getAnnotation(RespResult.class));
             } else if (method.isAnnotationPresent(RespResult.class)) {
                 // 判断是否在方法上添加了注解
-                request.setAttribute(RESPONSE_RESULTVO_ATTR, method.getAnnotation(RespResult.class));
+                request.setAttribute(RESPONSE_RESULT_ATTR, method.getAnnotation(RespResult.class));
             }
         }
         return true;

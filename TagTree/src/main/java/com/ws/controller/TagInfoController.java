@@ -46,10 +46,9 @@ public class TagInfoController {
      * @param result  结果
      * @return {@link Result}<{@link ?}>
      */
-    //测试自定义注解能否使用
     @RespResult
     @PostMapping(value = "/add")
-    public String addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
+    public Result<?> addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
         log.info("nacos服务器中配置文件的值：{}", name);
         // 入参校验
         List<ObjectError> allErrors = result.getAllErrors();
@@ -57,11 +56,9 @@ public class TagInfoController {
         if (!allErrors.isEmpty()) {
             // 校验信息返回
             String errMsgs = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("；"));
-            // return Result.FAIL(errMsgs);
-            return errMsgs;
+            return Result.FAIL(errMsgs);
         }
-        // return tagInfoService.addTagInfo(tagInfo);
-        return "true";
+        return tagInfoService.addTagInfo(tagInfo);
     }
 
     /**
@@ -109,6 +106,20 @@ public class TagInfoController {
             return Result.FAIL("查询不到数据");
         }
         return Result.SUCCESS(tagInfoVOS);
+    }
+
+
+    /**
+     * 自定义注释测试
+     *
+     * @return {@link String}
+     */
+    @RespResult
+    @GetMapping(value = "/customAnnotation")
+    public List<?> customAnnotationTest(){
+        Result<List<TagInfoVO>> result = this.getAllChildByParent2(Long.valueOf(1));
+        List<TagInfoVO> list = result.getData();
+        return list;
     }
 
 

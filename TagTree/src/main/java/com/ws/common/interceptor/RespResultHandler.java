@@ -3,6 +3,7 @@ package com.ws.common.interceptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ws.common.Result;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -22,46 +23,63 @@ import javax.servlet.http.HttpServletRequest;
  * @author wangsen_a
  * @date 2023/12/13
  */
+@Slf4j
 @RestControllerAdvice
 public class RespResultHandler implements ResponseBodyAdvice<Object> {
 
-    // 属性名称，用于记录是否标注了RespResult注解
-    public static final String RESPONSE_RESULTVO_ATTR = "RESPONSE_RESULTVO_ATTR";
+    /**
+     * 属性名称，用于记录是否标注了RespResult注解，从而对返回值进行统一封装
+     */
+    public static final String RESPONSE_RESULT_ATTR = "RESPONSE_RESULT_ATTR";
 
     @Autowired
     private ObjectMapper objectMapper;
 
     /**
-     * 判断是否需要执行beforeBodyWrite方法，true为执行；false为不执行
+     * 判断是否需要执行 beforeBodyWrite 方法，true为执行；false为不执行
      *
-     * @param returnType  返回类型
-     * @param convertType 转换类型
+     * @param returnType    返回类型
+     * @param converterType 转换器类型
      * @return boolean
      */
     @Override
-    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> convertType) {
-
+    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = requestAttributes.getRequest();
-        // 判断请求中是否有标记字段RESPONSE_RESULTVO_ATTR, 如果有则返回true，否则返回false
-        RespResult respResult = (RespResult) request.getAttribute(RESPONSE_RESULTVO_ATTR);
-        boolean b = respResult != null ? true : false;
-        return b;
+        // 断言一下是否为空
+        if (requestAttributes != null) {
+            HttpServletRequest request = requestAttributes.getRequest();
+            // 判断请求中是否有标记字段RESPONSE_RESULT_ATTR, 如果有则返回true，否则返回false
+            RespResult respResult = (RespResult) request.getAttribute(RESPONSE_RESULT_ATTR);
+            return respResult != null;
+        }
+        return false;
     }
 
+    /**
+     * controller方法执行返回后，拦截返回值对象执行该方法
+     *
+     * @param methodParameter 方法参数
+     * @param contentType     响应内容类型
+     * @param converterType   消息转换器类型
+     * @param request         请求
+     * @param object          controller返回对象
+     * @param response        响应
+     * @return {@link Object}
+     */
     @SneakyThrows
     @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
-                                  Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
+    public Object beforeBodyWrite(Object object, MethodParameter methodParameter, MediaType contentType,
+                                  Class<? extends HttpMessageConverter<?>> converterType, ServerHttpRequest request,
                                   ServerHttpResponse response) {
-        if (body instanceof RespResult) {
-            return (RespResult) body;
-        } else if (body instanceof Result) {
-            return body;
+        // object为controller的返回值对象
+        if (object instanceof RespResult) {
+            return (RespResult) object;
+        } else if (object instanceof Result) {
+            return object;
             // 如果返回的是Sting类型，则做封装
-        } else if (body instanceof String) {
-            return objectMapper.writeValueAsString(Result.SUCCESS(body));
+        } else if (object instanceof String) {
+            return objectMapper.writeValueAsString(Result.SUCCESS(object));
         }
-        return Result.SUCCESS(body);
+        return Result.SUCCESS(object);
     }
 }
