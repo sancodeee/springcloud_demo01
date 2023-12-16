@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>TagTree</artifactId>
+    <artifactId>consumer_one</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -89,4 +89,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

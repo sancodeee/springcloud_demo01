@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>TagTree</module>
+        <module>consumer_one</module>
     </modules>
     <!-- spring boot版本 -->
     <parent>
