@@ -45,7 +45,7 @@ public class RespResultHandler implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        // 断言一下是否为空
+        // 判断一下是否为空
         if (requestAttributes != null) {
             HttpServletRequest request = requestAttributes.getRequest();
             // 判断请求中是否有标记字段RESPONSE_RESULT_ATTR, 如果有则返回true，否则返回false
