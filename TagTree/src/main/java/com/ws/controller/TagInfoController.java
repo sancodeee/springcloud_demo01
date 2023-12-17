@@ -124,6 +124,7 @@ public class TagInfoController {
     @RespResult
     @GetMapping(value = "/customAnnotation")
     public List<TagInfoVO> customAnnotationTest() {
+        log.info("线上开发环境属性值：name：{}", this.name);
         Result<List<TagInfoVO>> result = this.getAllChildByParent2(Long.valueOf(1));
         tagInfoMapper.getTagInfoByParent(Long.valueOf(1));
         return result.getData();
