@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author wangsen_a
  * @date 2023/12/18
  */
-@RequestMapping("consumerOne")
+@RequestMapping("/consumerOne")
 @RestController
 public class TagTreeController {
 

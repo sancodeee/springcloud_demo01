@@ -11,6 +11,7 @@
     <modules>
         <module>TagTree</module>
         <module>consumer_one</module>
+        <module>gateway_demo</module>
     </modules>
     <!-- spring boot版本 -->
     <parent>
