@@ -4,6 +4,7 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import reactor.core.publisher.Mono;
  * @author wangsen_a
  * @date 2023/12/18
  */
-// @Order(-1)
+@Order(-1)
 @Accessors(chain = true)
 @Component
 @Slf4j

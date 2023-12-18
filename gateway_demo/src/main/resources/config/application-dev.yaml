@@ -28,7 +28,7 @@ spring:
           uri: lb://consumerOneService
           predicates:
             - Path=/consumerOne/**
-          filters:
+          filters:   #路由过滤器
             - AddRequestHeader=Truth, add a header!
 
       default-filters:  #默认过滤器，会对所有的路由请求生效
