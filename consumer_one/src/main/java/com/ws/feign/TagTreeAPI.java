@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @FeignClient(name = "tagInfoService")
-public interface TagTreeClient {
+public interface TagTreeAPI {
 
     /**
      * 通过父级id获取一级子标签信息

@@ -1,7 +1,7 @@
 package com.ws.controller;
 
 import com.ws.common.Result;
-import com.ws.feign.TagTreeClient;
+import com.ws.feign.TagTreeAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ public class TagTreeController {
      * feign客户端注入
      */
     @Autowired
-    private TagTreeClient tagTreeClient;
+    private TagTreeAPI tagTreeAPI;
 
 
     /**
@@ -35,7 +35,7 @@ public class TagTreeController {
     @GetMapping("/getById")
     public Result<?> getTagByParentId(@RequestParam(name = "id", required = true) Long id) {
         // 通过openFeign调用远程服务接口
-        return tagTreeClient.getTagInfoByParent(id);
+        return tagTreeAPI.getTagInfoByParent(id);
     }
 
 }
