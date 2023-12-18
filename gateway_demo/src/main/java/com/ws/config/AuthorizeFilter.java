@@ -1,23 +1,15 @@
 package com.ws.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ws.common.Result;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 
 /**
  * 网关全局过滤器
@@ -25,7 +17,7 @@ import java.nio.charset.Charset;
  * @author wangsen_a
  * @date 2023/12/18
  */
-@Order(-1)
+// @Order(-1)
 @Accessors(chain = true)
 @Component
 @Slf4j
