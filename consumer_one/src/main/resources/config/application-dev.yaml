@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: tagInfoService
+    name: consumerOneService
 
   cloud:
     nacos:
