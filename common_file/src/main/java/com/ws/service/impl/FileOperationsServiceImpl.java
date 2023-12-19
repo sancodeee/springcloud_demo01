@@ -2,6 +2,7 @@ package com.ws.service.impl;
 
 import cn.hutool.core.io.FileUtil;
 import com.ws.service.FileOperationsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 @Service
+@Slf4j
 public class FileOperationsServiceImpl implements FileOperationsService {
 
     /**
@@ -56,8 +58,8 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         }
         File saveFile = new File(basePath + File.separator + originalFilename);
         multipartFile.transferTo(saveFile);
-        String url = "http://" + ip + ":" + port + "/file/download/" + originalFilename;
-
+        String url = "http://" + ip + ":" + port + "/download/singleFile/" + originalFilename;
+        log.info("下载路径：{}", url);
         return url;
     }
 
@@ -65,12 +67,11 @@ public class FileOperationsServiceImpl implements FileOperationsService {
      * 文件下载
      *
      * @param fileName 文件名称
-     * @param request  请求
      * @param response 响应
      * @throws IOException ioexception
      */
     @Override
-    public void fileDownload(String fileName, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void fileDownload(HttpServletResponse response, String fileName) throws IOException {
         String filePath = basePath + File.separator + fileName;
         if (!FileUtil.exist(filePath)) {
             return;
