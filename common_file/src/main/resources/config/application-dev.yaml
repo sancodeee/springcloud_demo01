@@ -19,6 +19,11 @@ spring:
       password: 169167866Spl.
       driver-class-name: com.mysql.cj.jdbc.Driver
 
+  servlet:
+    multipart:
+      max-file-size: 20MB   #文件大小设置
+      max-request-size: 20MB
+
 mybatis-plus:
   global-config:
     db-config:
@@ -28,4 +33,5 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 file:
-  basePath: D:\IDMdownload\file
+  basePath: D:\IDMdownload\file  #文件存储的父级目录
+  ip: localhost  #存储文件的主机ip

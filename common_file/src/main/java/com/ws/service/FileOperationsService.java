@@ -16,6 +16,6 @@ public interface FileOperationsService {
      */
     String fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException;
 
-    String fileDownload(String fileName, HttpServletRequest request, HttpServletResponse response);
+    void fileDownload(String fileName, HttpServletRequest request, HttpServletResponse response) throws IOException;
 
 }
