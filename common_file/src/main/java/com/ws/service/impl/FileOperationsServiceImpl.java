@@ -35,6 +35,8 @@ public class FileOperationsServiceImpl implements FileOperationsService {
     @Value("${server.port}")
     private String port;
 
+    private final String DOWNLOAD_SERVICE_API = "/download/singleFile/";
+
     /**
      * 文件上传
      *
@@ -63,7 +65,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         }
         File saveFile = new File(basePath + File.separator + originalFilename);
         multipartFile.transferTo(saveFile);
-        String url = "http://" + ip + ":" + port + "/download/singleFile/" + originalFilename;
+        String url = "http://" + ip + ":" + port + DOWNLOAD_SERVICE_API + originalFilename;
         log.info("下载路径：{}", url);
         return url;
     }
@@ -102,6 +104,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         if (!FileUtil.exist(filePath)) {
             // 文件不存在设置响应头状态404
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            log.error("文件不存在");
             return;
         }
         // 设置响应头告诉浏览器以附件形式下载文件
