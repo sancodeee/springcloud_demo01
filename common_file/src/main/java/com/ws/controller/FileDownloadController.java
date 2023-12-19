@@ -1,5 +1,6 @@
 package com.ws.controller;
 
+import com.ws.common.Result;
 import com.ws.service.FileOperationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ public class FileDownloadController {
     @GetMapping(value = "/singleFile/{fileName}")
     public void downloadFile(HttpServletResponse response , @PathVariable(value = "fileName") String fileName) throws IOException {
         fileOperationsService.fileDownload(response, fileName);
+        Result.SUCCESS("下载成功");
     }
 
 }

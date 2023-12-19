@@ -1,5 +1,6 @@
 package com.ws.controller;
 
+import com.ws.common.Result;
 import com.ws.service.FileOperationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +26,9 @@ public class FileUploadController {
      * @return {@link String}
      */
     @PostMapping(value = "/file")
-    public String fileUpload(HttpServletRequest request, MultipartFile file) throws IOException {
-        return fileOperationsService.fileUpload(request, file);
+    public Result<?> fileUpload(HttpServletRequest request, MultipartFile file) throws IOException {
+        String url = fileOperationsService.fileUpload(request, file);
+        return Result.SUCCESS("上传成功", url);
     }
 
 }
