@@ -16,6 +16,13 @@ public interface FileOperationsService {
      */
     String fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException;
 
+    /**
+     * 文件下载
+     *
+     * @param response 响应
+     * @param fileName 文件名称
+     * @throws IOException ioexception
+     */
     void fileDownload(HttpServletResponse response, String fileName) throws IOException;
 
 }

@@ -18,10 +18,18 @@ public class FileDownloadController {
     @Autowired
     private FileOperationsService fileOperationsService;
 
+    /**
+     * 文件下载
+     *
+     * @param response 响应
+     * @param fileName 文件名称
+     * @return {@link Result}<{@link ?}>
+     * @throws IOException ioexception
+     */
     @GetMapping(value = "/singleFile/{fileName}")
-    public void downloadFile(HttpServletResponse response , @PathVariable(value = "fileName") String fileName) throws IOException {
+    public Result<?> fileDownload(HttpServletResponse response, @PathVariable(value = "fileName") String fileName) throws IOException {
         fileOperationsService.fileDownload(response, fileName);
-        Result.SUCCESS("下载成功");
+        return Result.SUCCESS("下载成功");
     }
 
 }
