@@ -4,8 +4,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-public interface FileOperations {
+public interface FileOperationsService {
 
     /**
      * 文件上传
@@ -13,7 +14,7 @@ public interface FileOperations {
      * @param multipartFile 文件
      * @return {@link String}
      */
-    String fileUpload(HttpServletRequest request, MultipartFile multipartFile);
+    String fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException;
 
     String fileDownload(String fileName, HttpServletRequest request, HttpServletResponse response);
 

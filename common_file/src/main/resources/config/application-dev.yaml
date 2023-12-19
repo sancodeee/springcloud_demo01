@@ -26,3 +26,6 @@ mybatis-plus:
   configuration:
     #控制台打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+file:
+  basePath: D:\IDMdownload\file
