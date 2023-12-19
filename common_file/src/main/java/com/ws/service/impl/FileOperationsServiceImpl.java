@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 文件操作服务实现
@@ -107,8 +109,10 @@ public class FileOperationsServiceImpl implements FileOperationsService {
             log.error("文件不存在");
             return;
         }
+        // 对文件名进行编码，指定字符集为UTF-8
+        String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.toString());
         // 设置响应头告诉浏览器以附件形式下载文件
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        response.setHeader("Content-Disposition", "attachment; filename=" + encodedFileName);
         response.setContentType("application/octet-stream");
         // 文件的字节流数组
         byte[] bytes = FileUtil.readBytes(filePath);
@@ -119,4 +123,6 @@ public class FileOperationsServiceImpl implements FileOperationsService {
             e.printStackTrace();
         }
     }
+
+
 }
