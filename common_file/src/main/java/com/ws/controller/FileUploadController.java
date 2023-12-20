@@ -16,8 +16,12 @@ import java.io.IOException;
 @RequestMapping(value = "/upload")
 public class FileUploadController {
 
+    private final FileOperationsService fileOperationsService;
+
     @Autowired
-    private FileOperationsService fileOperationsService;
+    public FileUploadController(FileOperationsService fileOperationsService) {
+        this.fileOperationsService = fileOperationsService;
+    }
 
     /**
      * 文件上传
