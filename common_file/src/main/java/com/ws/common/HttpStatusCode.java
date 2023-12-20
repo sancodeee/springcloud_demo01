@@ -19,6 +19,7 @@ public enum HttpStatusCode {
     SUCCESS_200(200, "OK", "请求已经成功处理"),
     FAIL_501(501, "Parameter verification error", "参数校验错误"),
     FAIL_502(502, "Bad gateway", "错误网关"),
+    FAIL_401(401, "Unauthorized", "未授权"),
     FAIL_403(403, "Forbidden", "禁止访问"),
     FAIL_404(404, "Resource not found", "找不到资源"),
     FAIL_500(500, "Server internal error", "服务器内部错误");
