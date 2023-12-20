@@ -27,7 +27,7 @@ public class FileUploadController {
      * @return {@link Result}<{@link ?}>
      * @throws IOException ioexception
      */
-    @PostMapping(value = "/file")
+    @PostMapping(value = "/singleFile")
     public Result<?> fileUpload(HttpServletRequest request, @RequestBody MultipartFile file) throws IOException {
         String url = fileOperationsService.fileUpload(request, file);
         String resultData = "下载路径：" + url;

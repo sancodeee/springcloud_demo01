@@ -37,7 +37,10 @@ public class FileOperationsServiceImpl implements FileOperationsService {
     @Value("${server.port}")
     private String port;
 
-    private final String DOWNLOAD_SERVICE_API = "/download/singleFile/";
+    /**
+     * 下载接口API路径
+     */
+    private static final String DOWNLOAD_SERVICE_API = "/download/singleFile/";
 
     /**
      * 文件上传
@@ -51,10 +54,6 @@ public class FileOperationsServiceImpl implements FileOperationsService {
     public String fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException {
         // 原始文件名(带后缀)
         String originalFilename = multipartFile.getOriginalFilename();
-        // 文件名称
-        String mainName = FileUtil.mainName(originalFilename);
-        // 文件后缀
-        String extName = FileUtil.extName(originalFilename);
         // 文件存储路径
         if (FileUtil.exist(basePath)) {
             // 如果当前存储文件的父级目录不存在则创建
@@ -62,7 +61,6 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         }
         // 如果保存的文件已存在，那么就要重命名一个文件名称
         if (FileUtil.exist(basePath + File.separator + originalFilename)) {
-            // originalFilename = System.currentTimeMillis() + "_" + mainName + "." + extName;
             originalFilename = generateNewFilename(basePath, originalFilename);
         }
         File saveFile = new File(basePath + File.separator + originalFilename);
@@ -81,8 +79,10 @@ public class FileOperationsServiceImpl implements FileOperationsService {
      */
     private static String generateNewFilename(String basePath, String originalFilename) {
         File file = new File(basePath, originalFilename);
-        String mainName = originalFilename.substring(0, originalFilename.lastIndexOf('.'));
-        String extName = originalFilename.substring(originalFilename.lastIndexOf('.') + 1);
+        // 文件名称
+        String mainName = FileUtil.mainName(originalFilename);
+        // 文件后缀名
+        String extName = FileUtil.extName(originalFilename);
 
         int count = 1;
         while (file.exists()) {
