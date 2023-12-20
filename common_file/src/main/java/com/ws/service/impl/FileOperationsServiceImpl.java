@@ -124,5 +124,27 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         }
     }
 
-
+    /**
+     * 文件预览
+     *
+     * @param response 响应
+     * @param fileName 文件名称
+     * @throws IOException ioexception
+     */
+    @Override
+    public void filePreview(HttpServletResponse response, String fileName) throws IOException {
+        String filePath = basePath + File.separator + fileName;
+        if (!FileUtil.exist(filePath)) {
+            // 文件不存在设置响应头状态404
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            log.error("文件不存在");
+        }
+        // 文件字节流数组
+        byte[] bytes = FileUtil.readBytes(filePath);
+        try (ServletOutputStream os = response.getOutputStream()) {
+            os.write(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

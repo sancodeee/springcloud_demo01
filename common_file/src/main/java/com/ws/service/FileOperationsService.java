@@ -25,4 +25,13 @@ public interface FileOperationsService {
      */
     void fileDownload(HttpServletResponse response, String fileName) throws IOException;
 
+    /**
+     * 文件预览
+     *
+     * @param response 响应
+     * @param fileName 文件名称
+     * @throws IOException ioexception
+     */
+    void filePreview(HttpServletResponse response, String fileName) throws IOException;
+
 }

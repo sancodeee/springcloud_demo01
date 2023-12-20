@@ -41,4 +41,21 @@ public class FileDownloadController {
         return null;
     }
 
+    /**
+     * 文件预览
+     *
+     * @param response 响应
+     * @param fileName 文件名称
+     * @return {@link Result}<{@link ?}>
+     * @throws IOException ioexception
+     */
+    @GetMapping(value = "/preview/{fileName}")
+    public Result<?> filePreview(HttpServletResponse response, @PathVariable(value = "fileName") String fileName) throws IOException {
+        fileOperationsService.filePreview(response, fileName);
+        if (response.getStatus() == HttpServletResponse.SC_NOT_FOUND) {
+            return Result.FAIL(HttpStatusCode.FAIL_404.getCode(), HttpStatusCode.FAIL_404.getCnMessage());
+        }
+        return null;
+    }
+
 }
