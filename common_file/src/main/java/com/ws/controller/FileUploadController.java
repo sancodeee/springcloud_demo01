@@ -1,12 +1,11 @@
 package com.ws.controller;
 
+import com.ws.biz.FileProcessingBIZ;
 import com.ws.common.Result;
 import com.ws.service.FileOperationsService;
+import com.ws.vo.FileUploadVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +15,11 @@ import java.io.IOException;
 @RequestMapping(value = "/upload")
 public class FileUploadController {
 
-    private final FileOperationsService fileOperationsService;
+    @Autowired
+    private FileOperationsService fileOperationsService;
 
     @Autowired
-    public FileUploadController(FileOperationsService fileOperationsService) {
-        this.fileOperationsService = fileOperationsService;
-    }
+    private FileProcessingBIZ fileProcessingBIZ;
 
     /**
      * 文件上传
@@ -33,9 +31,28 @@ public class FileUploadController {
      */
     @PostMapping(value = "/singleFile")
     public Result<?> fileUpload(HttpServletRequest request, @RequestBody MultipartFile file) throws IOException {
-        String url = fileOperationsService.fileUpload(request, file);
-        String resultData = "下载路径：" + url;
-        return Result.SUCCESS("上传成功", resultData);
+        FileUploadVO uploadVO = fileOperationsService.fileUpload(request, file);
+        return Result.SUCCESS("上传成功", uploadVO);
+    }
+
+    /**
+     * 文件上传并保存信息
+     *
+     * @param request 请求
+     * @param file    文件
+     * @param tagId   标签id
+     * @return {@link Result}<{@link ?}>
+     * @throws IOException ioexception
+     */
+    @PostMapping(value = "/singleFile/addInfo")
+    public Result<?> fileUploadAndSaveInfo(HttpServletRequest request, @RequestBody MultipartFile file,
+                                           @RequestParam("tagId") Long tagId) throws IOException {
+        FileUploadVO uploadVO = fileProcessingBIZ.saveFile(request, file, tagId);
+        if (!uploadVO.getSaveSuccess()) {
+            return Result.FAIL("文件信息保存失败");
+        }
+
+        return Result.SUCCESS("文件上传并保存成功", uploadVO);
     }
 
 }

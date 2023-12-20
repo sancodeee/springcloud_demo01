@@ -1,8 +1,11 @@
 package com.ws.service.impl;
 
 import cn.hutool.core.io.FileUtil;
+import com.ws.service.FileInfoService;
 import com.ws.service.FileOperationsService;
+import com.ws.vo.FileUploadVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +27,9 @@ import java.nio.charset.StandardCharsets;
 @Service
 @Slf4j
 public class FileOperationsServiceImpl implements FileOperationsService {
+
+    @Autowired
+    private FileInfoService fileInfoService;
 
     /**
      * 文件父级路径
@@ -51,7 +57,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
      * @throws IOException ioexception
      */
     @Override
-    public String fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException {
+    public FileUploadVO fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException {
         // 原始文件名(带后缀)
         String originalFilename = multipartFile.getOriginalFilename();
         // 文件存储路径
@@ -64,10 +70,14 @@ public class FileOperationsServiceImpl implements FileOperationsService {
             originalFilename = generateNewFilename(basePath, originalFilename);
         }
         File saveFile = new File(basePath + File.separator + originalFilename);
+        // 存储文件 到服务器指定目录
         multipartFile.transferTo(saveFile);
         String url = "http://" + ip + ":" + port + DOWNLOAD_SERVICE_API + originalFilename;
+        FileUploadVO uploadVO = new FileUploadVO();
+        uploadVO.setDownloadUrl(url);
+        uploadVO.setSavePath(basePath + File.separator + originalFilename);
         log.info("下载路径：{}", url);
-        return url;
+        return uploadVO;
     }
 
     /**

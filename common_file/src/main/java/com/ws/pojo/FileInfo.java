@@ -31,6 +31,11 @@ public class FileInfo {
     private Long id;
 
     /**
+     * 标签id
+     */
+    private Long tagId;
+
+    /**
      * 文件名称
      */
     private String fileName;
@@ -55,7 +60,7 @@ public class FileInfo {
     /**
      * 创建人
      */
-    private String creator;
+    private String creator = "admin";
 
     /**
      * 更新时间
@@ -67,7 +72,7 @@ public class FileInfo {
     /**
      * 更新人
      */
-    private String updater;
+    private String updater = "admin";
 
 
     /**

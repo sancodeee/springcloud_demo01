@@ -1,5 +1,6 @@
 package com.ws.service;
 
+import com.ws.vo.FileUploadVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public interface FileOperationsService {
      * @param multipartFile 文件
      * @return {@link String}
      */
-    String fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException;
+    FileUploadVO fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException;
 
     /**
      * 文件下载
