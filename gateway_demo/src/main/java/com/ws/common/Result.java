@@ -24,18 +24,22 @@ public class Result<T> implements Serializable {
      * 是否成功
      */
     private Boolean isSucceed = true;
+
     /**
      * 代码
      */
     private Integer code = 0;
+
     /**
      * 消息
      */
     private String message = "成功";
+
     /**
      * 数据
      */
     private T data;
+
     /**
      * 时间戳
      */
