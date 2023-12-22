@@ -1,19 +1,18 @@
 package com.ws.test;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.ws.dao.FileInfoMapper;
 import com.ws.pojo.FileInfo;
 import com.ws.thread.FileThreadOne;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
 
+@Slf4j
 @Component
 public class TestOne {
 
@@ -48,20 +47,21 @@ public class TestOne {
         thread.start();
         Object o = futureTask.get();
         System.out.println(o.toString());
-        System.out.println("------------------------------------");
+    }
+
+    @Test
+    public void test() throws InterruptedException, ExecutionException {
+        ExecutorService threadPool = Executors.newFixedThreadPool(2);
         Callable<List<FileInfo>> callable = () -> {
-            List<FileInfo> fileInfos = fileInfoMapper.selectList(new LambdaQueryWrapper<FileInfo>().eq(FileInfo::getTagId, 1));
-            if (ObjectUtil.isNull(fileInfos)) {
-                List<FileInfo> List = new ArrayList<>();
-                return Collections.EMPTY_LIST;
-            }
+            LambdaQueryWrapper<FileInfo> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(FileInfo::getTagId, 2);
+            List<FileInfo> fileInfos = fileInfoMapper.selectList(wrapper);
+            System.out.println("查询结果：" + fileInfos);
             return fileInfos;
         };
-        FutureTask<List<FileInfo>> listFutureTask = new FutureTask<>(callable);
-        new Thread(listFutureTask).start();
-        List<FileInfo> fileInfos = listFutureTask.get();
+        Future<List<FileInfo>> future = threadPool.submit(callable);
+        List<FileInfo> fileInfos = future.get();
         System.out.println(fileInfos);
-
     }
 
 }

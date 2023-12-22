@@ -1,6 +1,8 @@
 package com.ws.biz;
 
 import cn.hutool.core.io.FileUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.ws.dao.FileInfoMapper;
 import com.ws.pojo.FileInfo;
 import com.ws.service.FileInfoService;
 import com.ws.service.FileOperationsService;
@@ -12,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.*;
 
 @Component
 @Slf4j
@@ -22,6 +26,9 @@ public class FileProcessingBIZ {
 
     @Autowired
     private FileInfoService fileInfoService;
+
+    @Autowired
+    private FileInfoMapper fileInfoMapper;
 
     /**
      * 保存文件
@@ -50,6 +57,35 @@ public class FileProcessingBIZ {
         uploadVO.setSaveSuccess(addFlag);
         log.info("文件信息保存结果：{}", addFlag);
         return uploadVO;
+    }
+
+    /**
+     * 线程测试
+     *
+     * @return {@link List}<{@link FileInfo}>
+     */
+    public List<FileInfo> threadTest(Long tagId) throws ExecutionException, InterruptedException {
+        // 单线程线程池
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+        // 线程一
+        Callable<List<FileInfo>> callable = () -> {
+            LambdaQueryWrapper<FileInfo> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(FileInfo::getTagId, tagId);
+            List<FileInfo> list = fileInfoMapper.selectList(wrapper);
+            return list;
+        };
+        Future<List<FileInfo>> fileInfoListFuture = fixedThreadPool.submit(callable);
+        // 线程二
+        Callable<List<FileInfo>> callable1 = () -> {
+            LambdaQueryWrapper<FileInfo> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(FileInfo::getTagId, tagId);
+            List<FileInfo> list = fileInfoMapper.selectList(wrapper);
+            return list;
+        };
+        Future<List<FileInfo>> future = fixedThreadPool.submit(callable1);
+        List<FileInfo> fileInfos = fileInfoListFuture.get();
+        List<FileInfo> fileInfos1 = future.get();
+        return fileInfos;
     }
 
 }
