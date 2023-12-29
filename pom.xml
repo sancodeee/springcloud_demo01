@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>TagTree</module>
+        <module>tag_tree</module>
         <module>consumer_one</module>
         <module>gateway_demo</module>
         <module>common_file</module>
@@ -92,7 +92,14 @@
             </snapshots>
         </repository>
     </repositories>
-    <build>
 
+    <build>
+        <!-- maven打包插件 -->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 </project>
