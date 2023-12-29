@@ -41,7 +41,6 @@ public class Result<T> implements Serializable {
      */
     private String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-
     public Result<T> success(String message) {
         this.message = message;
         this.code = HttpStatusCode.SUCCESS_200.getCode();
