@@ -32,6 +32,7 @@
     </properties>
 
     <dependencyManagement>
+        <!-- 依赖管理 -->
         <dependencies>
             <!-- spring-cloud-->
             <dependency>
