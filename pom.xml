@@ -52,7 +52,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- 定义maven下载依赖地址 优先级高于settings文件中配置的mirrors -->
+    <!-- 定义依赖下载的仓库，例如某些私有仓库 -->
     <repositories>
         <!--    确定spring cloud私有仓库    -->
         <repository>
@@ -62,6 +62,7 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <!-- 禁用快照版本下载：不稳定 -->
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -73,7 +74,7 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <!-- 快照版本的依赖关闭 -->
+            <!-- 快照版本的依赖禁止下载 -->
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
