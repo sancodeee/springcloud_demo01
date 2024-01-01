@@ -1,0 +1,43 @@
+server:
+  port: 8005
+# spring相关配置
+spring:
+  datasource:
+    # druid连接池配置
+    druid:
+      url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&
+      username: root
+      password: 169167866Spl.
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      db-type: mysql
+    # 常规连接池配置 这里使用常规连接池配置的原因是ucode代码生成插件不支持druid，会循环报错
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 169167866Spl.
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&
+
+# mybatis-plus相关配置
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    #控制台打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 代码自动生成器相关配置
+ucode:
+  code:
+    module-name: service-book  #模块名称
+    package-name: com.ws
+    domain:
+      add-construction-method: true
+      add-note-info: true
+    join-query: false    #是否开启连接查询
+    remove-table-prefix: true    #是否移除表名前缀
+    use-mybatis-plus: true
+    use-swagger: false   #是否使用swagger
+    xml:
+      add-xml: true  #是否添加xml文件
+    filter-sys-table: true  #是否过滤系统表
+
