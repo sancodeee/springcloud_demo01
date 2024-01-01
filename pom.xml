@@ -7,7 +7,7 @@
     <artifactId>springcloud_demo_study</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>spring-cloud-demo</name>
+    <name>spring-cloud-study-demo</name>
     <description>spring-cloud项目案例</description>
     <modules>
         <module>service-tag-tree</module>
@@ -26,10 +26,17 @@
     </parent>
 
     <properties>
+        <!-- jdk版本 -->
         <java.version>1.8</java.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <!-- maven编译时指定编码UTF-8 -->
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!-- 使用 Java 1.8 版本的源代码进行编译 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <!-- 编译后的字节码也将与 Java 1.8 兼容 -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- 项目统一字符集编码UTF-8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 项目统一字符集编码UTF-8 -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- spring cloud版本 -->
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
@@ -37,8 +44,8 @@
         <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
     </properties>
 
+    <!-- 依赖管理 -->
     <dependencyManagement>
-        <!-- 依赖管理 -->
         <dependencies>
             <!-- spring-cloud-->
             <dependency>
@@ -58,6 +65,19 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <!-- Lombok 通过简单注解消除冗长代码  -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- hutool Java常用工具包-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+    </dependencies>
 
     <!-- 定义依赖下载的仓库，例如某些私有仓库 -->
     <repositories>
@@ -101,15 +121,40 @@
     </repositories>
 
     <build>
+        <finalName>${project.name}</finalName>
+        <!-- 资源过滤 -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yaml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resource</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.yaml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- maven编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${maven.compiler.encoding}</encoding>
                 </configuration>
             </plugin>
             <!-- maven打包插件 -->
