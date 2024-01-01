@@ -10,10 +10,11 @@
     <name>spring-cloud-demo</name>
     <description>spring-cloud项目案例</description>
     <modules>
-        <module>tag_tree</module>
-        <module>consumer_one</module>
-        <module>gateway_demo</module>
-        <module>common_file</module>
+        <module>service-tag-tree</module>
+        <module>service-consumer-one</module>
+        <module>project-gateway</module>
+        <module>service-common-file</module>
+        <module>project-common</module>
     </modules>
     <!-- spring boot版本 -->
     <parent>
@@ -73,7 +74,7 @@
         </repository>
         <repository>
             <id>aliyun</id>
-            <name>aliyun Repository</name>
+            <name>aliyun-public</name>
             <url>https://maven.aliyun.com/repository/public</url>
             <releases>
                 <enabled>true</enabled>
