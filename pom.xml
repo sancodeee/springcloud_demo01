@@ -12,11 +12,12 @@
     <modules>
         <module>service-tag-tree</module>
         <module>service-consumer-one</module>
-        <module>project-gateway</module>
+        <module>service-authentication</module>
         <module>service-common-file</module>
+        <module>project-gateway</module>
         <module>project-common</module>
         <module>project-api</module>
-        <module>service-book</module>
+
     </modules>
     <!-- spring boot版本 -->
     <parent>
@@ -42,6 +43,8 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <!-- spring cloud alibaba版本 -->
         <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
+        <!-- hutool版本 -->
+        <hutool.version>5.8.9</hutool.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -76,6 +79,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 
