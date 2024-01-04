@@ -38,13 +38,20 @@ public class TokenUtils {
                 .sign(Algorithm.HMAC256(password)); // 根据密码经过HMAC256算法加密后作为密钥 进行签名
     }
 
+    /**
+     * 获取当前用户
+     *
+     * @return {@link User}
+     */
     public static User getCurrentUser() {
         try {
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = requestAttributes.getRequest();
             String token = request.getHeader("token");
             if (StringUtils.isNotBlank(token)) {
+                // 解析token 获取userId
                 String userId = JWT.decode(token).getAudience().get(0);
+                // 根据userId查库
                 return staticUserMapper.selectById(Long.valueOf(userId));
             }
         } catch (Exception e) {

@@ -23,6 +23,7 @@ spring:
             - Path=/tagInfo/**   #按照路径匹配，只要以/tagInfo/开头就符合要求
           filters:
             - AddRequestHeader=Truth, add a header!
+      
         #consumerOne服务
         - id: consumerOne-service
           uri: lb://consumerOneService
