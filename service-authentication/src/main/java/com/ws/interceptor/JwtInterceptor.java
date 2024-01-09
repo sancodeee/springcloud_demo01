@@ -34,6 +34,7 @@ public class JwtInterceptor implements HandlerInterceptor {
      * @param handler  处理程序
      * @return boolean
      */
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 获取请求中的token
         String token = request.getHeader("token");

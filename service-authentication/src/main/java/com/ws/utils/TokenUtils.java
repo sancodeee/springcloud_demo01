@@ -1,4 +1,4 @@
-package com.ws.Utils;
+package com.ws.utils;
 
 import cn.hutool.core.date.DateUtil;
 import com.auth0.jwt.JWT;
