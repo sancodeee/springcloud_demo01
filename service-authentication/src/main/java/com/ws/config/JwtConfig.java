@@ -13,7 +13,8 @@ public class JwtConfig extends WebMvcConfigurationSupport {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new JwtInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login", "/register"); //排除拦截登录、注册接口
+                //排除拦截登录、注册接口
+                .excludePathPatterns("/login", "/register");
         super.addInterceptors(registry);
     }
 
