@@ -34,17 +34,24 @@ public class TokenUtils {
     public static String createToken(String userId, String password) {
 
         return JWT.create().withAudience(userId) // 将用户userId保存到token中作为载荷
-                .withExpiresAt(DateUtil.offsetHour(new Date(), 2)) //设置2小时后过期
-                .sign(Algorithm.HMAC256(password)); //根据密码经过HMAC256算法加密后作为密钥 进行签名
+                .withExpiresAt(DateUtil.offsetHour(new Date(), 2)) // 设置2小时后过期
+                .sign(Algorithm.HMAC256(password)); // 根据密码经过HMAC256算法加密后作为密钥 进行签名
     }
 
+    /**
+     * 获取当前用户
+     *
+     * @return {@link User}
+     */
     public static User getCurrentUser() {
         try {
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = requestAttributes.getRequest();
             String token = request.getHeader("token");
             if (StringUtils.isNotBlank(token)) {
+                // 解析token 获取userId
                 String userId = JWT.decode(token).getAudience().get(0);
+                // 根据userId查库
                 return staticUserMapper.selectById(Long.valueOf(userId));
             }
         } catch (Exception e) {

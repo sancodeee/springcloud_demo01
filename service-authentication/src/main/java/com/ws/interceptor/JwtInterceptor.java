@@ -28,6 +28,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     /**
      * 预处理
+     * 拦截请求
      *
      * @param request  请求
      * @param response 响应
