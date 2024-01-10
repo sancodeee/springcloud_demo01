@@ -23,6 +23,9 @@ public class ReqInfoAspect {
 
     private long startTime;
 
+    /**
+     * 该方法只做为占位符用，并不具有实际意义
+     */
     @Pointcut("execution(* com.ws.controller.*.*(..))")
     public void log() {
     }
@@ -59,7 +62,6 @@ public class ReqInfoAspect {
     }
 
     /**
-     * 后返回
      * 该方法只在切点方法执行成功后，执行
      * <p>
      * res是切点方法的返回结果
