@@ -6,6 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+/**
+ * jwt配置
+ *
+ * @author wangsen
+ * @date 2024/01/10
+ */
 @Configuration
 public class JwtConfig extends WebMvcConfigurationSupport {
 

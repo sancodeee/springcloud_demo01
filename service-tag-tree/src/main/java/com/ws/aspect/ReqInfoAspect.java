@@ -35,20 +35,24 @@ public class ReqInfoAspect {
         startTime = System.currentTimeMillis();
         ServletRequestAttributes servletAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (servletAttributes != null) {
-            HttpServletRequest request = servletAttributes.getRequest();
-            // url
-            String url = request.getRequestURL().toString();
-            // ip
-            String ip = request.getRemoteAddr();
-            // 类名和方法名
-            String classMethod = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
-            // 参数列表
-            Object[] args = joinPoint.getArgs();
-            RequestLogDTO requestLog = new RequestLogDTO(url, ip, classMethod, args);
+            RequestLogDTO requestLog = getRequestLogDTO(joinPoint, servletAttributes);
             // 打印
             log.info("==========================请求开始==========================");
             log.info("请求信息：{}", requestLog);
         }
+    }
+
+    private static RequestLogDTO getRequestLogDTO(JoinPoint joinPoint, ServletRequestAttributes servletAttributes) {
+        HttpServletRequest request = servletAttributes.getRequest();
+        // url
+        String url = request.getRequestURL().toString();
+        // ip
+        String ip = request.getRemoteAddr();
+        // 类名和方法名
+        String classMethod = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
+        // 参数列表
+        Object[] args = joinPoint.getArgs();
+        return new RequestLogDTO(url, ip, classMethod, args);
     }
 
     /**
