@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
      * @return {@link Result}<{@link ?}>
      */
     @ExceptionHandler(value = Exception.class)
-    public Result<?> ExceptionHandler(Exception e) {
+    public Result<?> exceptionHandler(Exception e) {
         log.error("出现异常：{}", e.toString());
         e.printStackTrace();
         return Result.FAIL("服务器出现未知错误");
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
      * @return {@link Result}<{@link ?}>
      */
     @ExceptionHandler(value = UnexpectedTypeException.class)
-    public Result<?> UnexpectedTypeExceptionHandler(Exception e) {
+    public Result<?> unexpectedTypeExceptionHandler(Exception e) {
         log.error("出现异常：{}", e.toString());
         e.printStackTrace();
         return Result.FAIL("服务器错误：数据校验异常");
