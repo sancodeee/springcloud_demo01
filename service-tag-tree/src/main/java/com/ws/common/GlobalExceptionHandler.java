@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
      * @return {@link Result}<{@link ?}>
      */
     @ExceptionHandler(value = NullPointerException.class)
-    public Result<?> NullPointerExceptionHandler(Exception e) {
+    public Result<?> nullPointerExceptionHandler(Exception e) {
         log.error("出现异常：{}", e.toString());
         e.printStackTrace();
         return Result.FAIL("服务器错误：空指针异常");
