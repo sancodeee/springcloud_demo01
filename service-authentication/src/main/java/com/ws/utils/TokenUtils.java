@@ -32,10 +32,12 @@ public class TokenUtils {
      * @return {@link String}
      */
     public static String createToken(String userId, String password) {
-
-        return JWT.create().withAudience(userId) // 将用户userId保存到token中作为载荷
-                .withExpiresAt(DateUtil.offsetHour(new Date(), 2)) // 设置2小时后过期
-                .sign(Algorithm.HMAC256(password)); // 根据密码经过HMAC256算法加密后作为密钥 进行签名
+        // 将用户userId保存到token中作为载荷
+        return JWT.create().withAudience(userId)
+                // 设置2小时后过期
+                .withExpiresAt(DateUtil.offsetHour(new Date(), 2))
+                // 根据密码经过HMAC256算法加密后作为密钥 进行签名
+                .sign(Algorithm.HMAC256(password));
     }
 
     /**
