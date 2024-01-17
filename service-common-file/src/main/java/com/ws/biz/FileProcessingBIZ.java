@@ -17,6 +17,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.*;
 
+/**
+ * 文件处理业务
+ *
+ * @author wangsen
+ * @date 2024/01/18
+ */
 @Component
 @Slf4j
 public class FileProcessingBIZ {
@@ -41,7 +47,7 @@ public class FileProcessingBIZ {
         FileInfo fileInfo = new FileInfo();
         fileInfo.setTagId(tagId);
         // 保存文件本体并返回下载路径
-        FileUploadVO uploadVO = fileOperationsService.fileUpload(request, multipartFile);
+        FileUploadVO uploadVO = fileOperationsService.fileUpload(multipartFile);
         fileInfo.setFilePath(uploadVO.getSavePath());
         // 文件下载路径
         String url = uploadVO.getDownloadUrl();

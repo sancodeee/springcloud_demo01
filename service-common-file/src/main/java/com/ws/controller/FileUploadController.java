@@ -31,7 +31,7 @@ public class FileUploadController {
      */
     @PostMapping(value = "/singleFile")
     public Result<?> fileUpload(HttpServletRequest request, @RequestBody MultipartFile file) throws IOException {
-        FileUploadVO uploadVO = fileOperationsService.fileUpload(request, file);
+        FileUploadVO uploadVO = fileOperationsService.fileUpload(file);
         return Result.SUCCESS("上传成功", uploadVO);
     }
 
