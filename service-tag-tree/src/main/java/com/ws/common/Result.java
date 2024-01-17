@@ -44,20 +44,20 @@ public class Result<T> implements Serializable {
 
     public Result<T> success(String message) {
         this.message = message;
-        this.code = HttpStatusCode.SUCCESS_200.getCode();
+        this.code = HttpStatusCodeEnum.SUCCESS_200.getCode();
         this.isSucceed = true;
         return this;
     }
 
     public static <T> Result<T> SUCCESS() {
         Result<T> r = new Result<>();
-        r.setCode(HttpStatusCode.SUCCESS_200.getCode());
+        r.setCode(HttpStatusCodeEnum.SUCCESS_200.getCode());
         return r;
     }
 
     public static <T> Result<T> SUCCESS(T data) {
         Result<T> r = new Result<>();
-        r.setCode(HttpStatusCode.SUCCESS_200.getCode());
+        r.setCode(HttpStatusCodeEnum.SUCCESS_200.getCode());
         r.setData(data);
         return r;
     }
@@ -68,7 +68,7 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> SUCCESS(String msg, T data) {
         Result<T> r = new Result<T>();
-        r.setCode(HttpStatusCode.SUCCESS_200.getCode());
+        r.setCode(HttpStatusCodeEnum.SUCCESS_200.getCode());
         r.setMessage(msg);
         r.setData(data);
         return r;
@@ -77,13 +77,13 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> FAIL() {
         Result<T> r = new Result<>();
         r.setIsSucceed(false);
-        r.setCode(HttpStatusCode.FAIL_500.getCode());
+        r.setCode(HttpStatusCodeEnum.FAIL_500.getCode());
         r.setMessage("服务器内部错误");
         return r;
     }
 
     public static <T> Result<T> FAIL(String msg) {
-        return FAIL(HttpStatusCode.FAIL_500.getCode(), msg);
+        return FAIL(HttpStatusCodeEnum.FAIL_500.getCode(), msg);
     }
 
     public static <T> Result<T> FAIL(int code, String msg) {

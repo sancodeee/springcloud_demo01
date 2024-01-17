@@ -71,7 +71,6 @@ public class JwtInterceptor implements HandlerInterceptor {
         } catch (JWTVerificationException e) {
             throw new CustomException(401, "用户验证失败，请重新登录");
         }
-
         return true;
     }
 }

@@ -14,7 +14,7 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-public enum HttpStatusCode {
+public enum HttpStatusCodeEnum {
 
     SUCCESS_200(200, "OK", "请求已经成功处理"),
     FAIL_501(501, "Parameter verification error", "参数校验错误"),

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 标签信息实体
@@ -22,8 +23,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @TableName(value = "sc_tag_info")
 @EqualsAndHashCode(callSuper = true)
-public class TagInfo extends BasePO {
+public class TagInfo extends BasePO implements Serializable {
 
+    private static final long serialVersionUID = -2013374768892598740L;
     /**
      * 主键id
      */
@@ -46,6 +48,5 @@ public class TagInfo extends BasePO {
      * 排序编号
      */
     private Integer sortNum;
-
 
 }
