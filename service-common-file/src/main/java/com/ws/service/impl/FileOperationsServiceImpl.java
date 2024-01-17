@@ -158,6 +158,12 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         }
     }
 
+    /**
+     * del文件
+     *
+     * @param response 响应
+     * @param fileName 文件名称
+     */
     @Override
     public void delFile(HttpServletResponse response, String fileName){
         String filePath = basePath + File.separator + fileName;
