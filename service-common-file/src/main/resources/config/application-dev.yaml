@@ -34,5 +34,5 @@ mybatis-plus:
 
 #文件操作相关配置
 file:
-  basePath: D:\IDMdownload\file  #文件存储的父级目录
+  basePath: D:\IDMdownload\file\  #文件存储的父级目录
   ip: localhost  #存储文件的主机ip

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
     private String port;
 
     /**
-     * 下载接口API路径
+     * 下载接口API
      */
     private static final String DOWNLOAD_SERVICE_API = "/download/singleFile/";
 
@@ -57,7 +56,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
      * @throws IOException ioexception
      */
     @Override
-    public FileUploadVO fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException {
+    public FileUploadVO fileUpload(MultipartFile multipartFile) throws IOException {
         // 原始文件名(带后缀)
         String originalFilename = multipartFile.getOriginalFilename();
         // 文件存储路径
@@ -72,6 +71,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         File saveFile = new File(basePath + File.separator + originalFilename);
         // 存储文件 到服务器指定目录
         multipartFile.transferTo(saveFile);
+        // 文件下载路径
         String url = "http://" + ip + ":" + port + DOWNLOAD_SERVICE_API + originalFilename;
         FileUploadVO uploadVO = new FileUploadVO();
         uploadVO.setDownloadUrl(url);
@@ -156,5 +156,17 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void delFile(HttpServletResponse response, String fileName){
+        String filePath = basePath + File.separator + fileName;
+        if (!FileUtil.exist(filePath)) {
+            // 文件不存在设置响应头状态404
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            log.error("文件不存在");
+        }
+        FileUtil.del(filePath);
+        System.out.println("删除文件" + fileName + "成功");
     }
 }

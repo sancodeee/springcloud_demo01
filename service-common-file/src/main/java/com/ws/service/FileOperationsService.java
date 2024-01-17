@@ -15,7 +15,7 @@ public interface FileOperationsService {
      * @param multipartFile 文件
      * @return {@link String}
      */
-    FileUploadVO fileUpload(HttpServletRequest request, MultipartFile multipartFile) throws IOException;
+    FileUploadVO fileUpload(MultipartFile multipartFile) throws IOException;
 
     /**
      * 文件下载
@@ -34,5 +34,12 @@ public interface FileOperationsService {
      * @throws IOException ioexception
      */
     void filePreview(HttpServletResponse response, String fileName) throws IOException;
+
+    /**
+     * 删除文件
+     *
+     * @param fileName 文件名称
+     */
+    void delFile(HttpServletResponse response, String fileName);
 
 }
