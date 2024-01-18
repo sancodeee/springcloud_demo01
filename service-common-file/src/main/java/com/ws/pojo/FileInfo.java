@@ -60,7 +60,7 @@ public class FileInfo {
     /**
      * 创建人
      */
-    private String creator = "admin";
+    private String creator = "default";
 
     /**
      * 更新时间
@@ -72,7 +72,7 @@ public class FileInfo {
     /**
      * 更新人
      */
-    private String updater = "admin";
+    private String updater = "default";
 
 
     /**
