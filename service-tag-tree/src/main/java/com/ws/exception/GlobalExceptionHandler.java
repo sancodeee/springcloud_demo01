@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result<?> ExceptionHandler(HttpServletRequest request, Exception e) {
         log.error("异常信息：{}", e.toString());
-        return Result.FAIL();
+        return Result.FAIL("服务器发生不明异常");
     }
 
     /**
