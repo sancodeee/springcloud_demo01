@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * 结果
  * 统一结果响应体
  *
  * @author wangsen_a
@@ -20,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 public class Result<T> implements Serializable {
 
+    private static final long serialVersionUID = 2614977424476745219L;
     /**
      * 是否成功
      */
@@ -40,6 +40,7 @@ public class Result<T> implements Serializable {
      * 时间戳
      */
     private String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
 
     public Result<T> success(String message) {
         this.message = message;
@@ -92,6 +93,5 @@ public class Result<T> implements Serializable {
         r.setIsSucceed(false);
         return r;
     }
-
 
 }
