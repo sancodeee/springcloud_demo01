@@ -46,7 +46,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (StringUtils.isBlank(token)) {
             throw new CustomException(401, "请登录");
         }
-        // 从token中获取userId
+        // 解析token获取userId
         String userId;
         // JWT.decode(token) 解码
         try {
