@@ -30,7 +30,7 @@ public class FileDownloadController {
      * @throws IOException ioexception
      */
     @GetMapping(value = "/singleFile/{fileName}")
-    public Result<?> fileDownload(HttpServletResponse response, @PathVariable(value = "fileName") String fileName) throws IOException {
+    public Result<?> fileDownload(HttpServletResponse response, @PathVariable("fileName") String fileName) throws IOException {
         // 下载文件
         fileOperationsService.fileDownload(response, fileName);
         // 如果状态码为404则说明要下载的文件不存在
@@ -50,7 +50,7 @@ public class FileDownloadController {
      * @throws IOException ioexception
      */
     @GetMapping(value = "/preview/{fileName}")
-    public Result<?> filePreview(HttpServletResponse response, @PathVariable(value = "fileName") String fileName) throws IOException {
+    public Result<?> filePreview(HttpServletResponse response, @PathVariable("fileName") String fileName) throws IOException {
         fileOperationsService.filePreview(response, fileName);
         if (response.getStatus() == HttpServletResponse.SC_NOT_FOUND) {
             return Result.FAIL(HttpStatusCode.FAIL_404.getCode(), HttpStatusCode.FAIL_404.getCnMessage());

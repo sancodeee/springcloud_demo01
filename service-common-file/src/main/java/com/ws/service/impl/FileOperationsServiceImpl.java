@@ -27,9 +27,6 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class FileOperationsServiceImpl implements FileOperationsService {
 
-    @Autowired
-    private FileInfoService fileInfoService;
-
     /**
      * 文件父级路径
      */
@@ -51,8 +48,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
      * 文件上传
      *
      * @param multipartFile 文件
-     * @param request       请求
-     * @return {@link String}
+     * @return {@link FileUploadVO}
      * @throws IOException ioexception
      */
     @Override

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.*;
@@ -27,23 +26,28 @@ import java.util.concurrent.*;
 @Slf4j
 public class FileProcessingBIZ {
 
-    @Autowired
-    private FileOperationsService fileOperationsService;
+    private final FileOperationsService fileOperationsService;
+
+    private final FileInfoService fileInfoService;
+
+    private final FileInfoMapper fileInfoMapper;
 
     @Autowired
-    private FileInfoService fileInfoService;
-
-    @Autowired
-    private FileInfoMapper fileInfoMapper;
+    public FileProcessingBIZ(FileOperationsService fileOperationsService, FileInfoService fileInfoService, FileInfoMapper fileInfoMapper) {
+        this.fileOperationsService = fileOperationsService;
+        this.fileInfoService = fileInfoService;
+        this.fileInfoMapper = fileInfoMapper;
+    }
 
     /**
      * 保存文件
      *
-     * @param request       请求
      * @param multipartFile 多部分文件
-     * @return boolean
+     * @param tagId         标签id
+     * @return {@link FileUploadVO}
+     * @throws IOException ioexception
      */
-    public FileUploadVO saveFile(HttpServletRequest request, MultipartFile multipartFile, Long tagId) throws IOException {
+    public FileUploadVO saveFile(MultipartFile multipartFile, Long tagId) throws IOException {
         FileInfo fileInfo = new FileInfo();
         fileInfo.setTagId(tagId);
         // 保存文件本体并返回下载路径
