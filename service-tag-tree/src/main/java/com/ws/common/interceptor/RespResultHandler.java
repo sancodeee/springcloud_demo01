@@ -27,13 +27,17 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class RespResultHandler implements ResponseBodyAdvice<Object> {
 
+    private final ObjectMapper objectMapper;
+
+    @Autowired
+    public RespResultHandler(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     /**
      * 属性名称，用于记录是否标注了RespResult注解，从而对返回值进行统一封装
      */
     public static final String RESPONSE_RESULT_ATTR = "RESPONSE_RESULT_ATTR";
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     /**
      * 判断是否需要执行 beforeBodyWrite 方法，true为执行；false为不执行
