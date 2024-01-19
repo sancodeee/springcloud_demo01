@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.ws.common.exception.CustomException;
 import com.ws.dao.UserMapper;
 import com.ws.pojo.User;
+import com.ws.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -53,6 +54,10 @@ public class JwtInterceptor implements HandlerInterceptor {
             userId = JWT.decode(token).getAudience().get(0);
         } catch (JWTDecodeException e) {
             throw new CustomException(401, "请登录");
+        }
+        // 验证token是否是最新的token，老token被标记失效
+        if (TokenUtils.isInvalided(userId, token)) {
+            throw new CustomException(409, "token失效，请重新登录");
         }
         // 根据userId去数据库中查询该用户是否存在
         User user = userMapper.selectById(userId);
