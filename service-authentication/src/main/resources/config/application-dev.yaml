@@ -25,19 +25,3 @@ mybatis-plus:
     #控制台打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# 代码自动生成器相关配置
-ucode:
-  code:
-    module-name: service-book  #模块名称
-    package-name: com.ws
-    domain:
-      add-construction-method: true
-      add-note-info: true
-    join-query: false    #是否开启连接查询
-    remove-table-prefix: true    #是否移除表名前缀
-    use-mybatis-plus: true
-    use-swagger: false   #是否使用swagger
-    xml:
-      add-xml: true  #是否添加xml文件
-    filter-sys-table: true  #是否过滤系统表
-
