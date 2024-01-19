@@ -40,7 +40,7 @@ public class TokenUtils {
     private static final int MAX_MAP_SIZE = 20;
     private static final int MAX_LIST_SIZE = 10;
     /**
-     * 用户token
+     * 用户有效token
      */
     private static final Map<String, String> userTokenMap = new ConcurrentHashMap<>();
     /**
