@@ -1,9 +1,10 @@
-package com.ws.common;
+package com.ws.common.exception;
 
+import com.ws.common.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局异常处理类
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @date 2023/12/13
  */
 @Slf4j
-@RestControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
@@ -21,24 +22,23 @@ public class GlobalExceptionHandler {
      * @param e e
      * @return {@link Result}<{@link ?}>
      */
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(Exception.class)
     @ResponseBody
     public Result<?> ExceptionHandler(Exception e) {
         log.error("异常信息：{}", e.toString());
-        e.printStackTrace();
-        return Result.FAIL("服务器出现未知错误");
+        return Result.FAIL("服务器发生不明异常");
     }
 
     /**
-     * 自定义异常处理程序
+     * 自定义处理程序
      *
      * @param e e
      * @return {@link Result}<{@link ?}>
      */
-    @ExceptionHandler(value = CustomException.class)
+    @ExceptionHandler(CustomException.class)
     @ResponseBody
-    public Result<?> customExceptionHandler(CustomException e) {
-        log.error("异常信息：{}", e);
+    public Result<?> CustomHandler(CustomException e) {
+        //返回错误信息
         return Result.FAIL(e.getCode(), e.getMsg());
     }
 

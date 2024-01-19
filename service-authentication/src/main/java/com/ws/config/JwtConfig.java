@@ -1,6 +1,6 @@
 package com.ws.config;
 
-import com.ws.interceptor.JwtInterceptor;
+import com.ws.common.interceptor.JwtInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

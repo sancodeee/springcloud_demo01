@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 public class Result<T> implements Serializable {
 
+    private static final long serialVersionUID = 2614977424476745219L;
     /**
      * 是否成功
      */

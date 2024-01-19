@@ -1,11 +1,11 @@
-package com.ws.interceptor;
+package com.ws.common.interceptor;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.ws.common.CustomException;
+import com.ws.common.exception.CustomException;
 import com.ws.dao.UserMapper;
 import com.ws.pojo.User;
 import org.apache.commons.lang.StringUtils;

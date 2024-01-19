@@ -29,7 +29,7 @@ public class BasePO {
     /**
      * 创造者
      */
-    private String creator;
+    private String creator = "default";
 
     /**
      * 更新时间
@@ -41,7 +41,7 @@ public class BasePO {
     /**
      * 更新
      */
-    private String updater;
+    private String updater = "default";
 
     /**
      * 被删除

@@ -6,21 +6,29 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.ws.dao.UserMapper;
 import com.ws.pojo.User;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
+@Component
 public class TokenUtils {
-
-    @Resource
-    UserMapper userMapper;
 
     private static UserMapper staticUserMapper;
 
-    public void setUserMapper() {
+    private final UserMapper userMapper;
+
+    @Autowired
+    public TokenUtils(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    @PostConstruct
+    public void setUserService() {
         staticUserMapper = userMapper;
     }
 
