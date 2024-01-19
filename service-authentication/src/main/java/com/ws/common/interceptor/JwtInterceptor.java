@@ -57,7 +57,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
         // 验证token是否是最新的token，老token被标记失效
         if (TokenUtils.isInvalided(userId, token)) {
-            throw new CustomException(409, "token失效，请重新登录");
+            throw new CustomException(401, "token失效，请重新登录");
         }
         // 根据userId去数据库中查询该用户是否存在
         User user = userMapper.selectById(userId);

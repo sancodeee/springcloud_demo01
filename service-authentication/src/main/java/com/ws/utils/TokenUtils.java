@@ -13,7 +13,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class TokenUtils {
@@ -32,14 +36,18 @@ public class TokenUtils {
         staticUserMapper = userMapper;
     }
 
+    // 设定最大大小
+    private static final int MAX_MAP_SIZE = 20;
+    private static final int MAX_LIST_SIZE = 10;
     /**
      * 用户token
      */
-    private static Map<String, String> userTokenMap = new HashMap<>();
+    private static final Map<String, String> userTokenMap = new ConcurrentHashMap<>();
     /**
      * 无效token
      */
-    private static Map<String, List<String>> invalidTokenMap = new HashMap<>();
+    private static final Map<String, List<String>> invalidTokenMap = new ConcurrentHashMap<>();
+
 
     /**
      * 创建token令牌
@@ -64,7 +72,11 @@ public class TokenUtils {
                 mapList = new ArrayList<>();
             }
             oldTokenList = mapList;
+            // 清理list，防止oom
+            listCleanup(oldTokenList);
             oldTokenList.add(oldToken);
+            // 清理map，防止oom
+            mapCleanup(invalidTokenMap);
             // 将老token存入map
             invalidTokenMap.put(userId, oldTokenList);
         }
@@ -83,6 +95,34 @@ public class TokenUtils {
             return false;
         }
         return oldTokenList.stream().anyMatch(oldToken -> oldToken.equals(token));
+    }
+
+    /**
+     * map清理
+     *
+     * @param map CurrentHashMap
+     */
+    private static <K, V> void mapCleanup(Map<K, List<V>> map) {
+        if (map.size() > MAX_MAP_SIZE) {
+            int toRemove = map.size() - MAX_MAP_SIZE + 1;
+            map.entrySet().stream().limit(toRemove).forEach(entry -> {
+                // 移除最开始添加的entry
+                map.remove(entry.getKey());
+            });
+        }
+    }
+
+    /**
+     * 列表中清除
+     * list清理
+     *
+     * @param list 列表
+     */
+    private static <T> void listCleanup(List<T> list) {
+        if (list.size() > MAX_LIST_SIZE) {
+            // 清理最开始添加的值
+            list.subList(0, list.size() - MAX_LIST_SIZE).clear();
+        }
     }
 
     /**
