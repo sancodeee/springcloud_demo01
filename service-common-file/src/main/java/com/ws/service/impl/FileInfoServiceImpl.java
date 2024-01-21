@@ -14,6 +14,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 文件信息服务实现
+ *
+ * @author wangsen
+ * @date 2024/01/21
+ */
 @Slf4j
 @Service
 public class FileInfoServiceImpl extends ServiceImpl<FileInfoMapper, FileInfo> implements FileInfoService {
