@@ -63,8 +63,10 @@ public class FileProcessingBIZ {
         String extName = FileUtil.extName(originalFilename);
         fileInfo.setFileType(extName);
         // 保存文件信息
-        boolean addFlag = fileInfoService.addFileInfo(fileInfo);
-        uploadVO.setSaveSuccess(addFlag);
+        boolean addFlag = false;
+        if (fileInfoService.getBaseMapper().insert(fileInfo) > 0) {
+            uploadVO.setSaveSuccess(true);
+        }
         log.info("文件信息保存结果：{}", addFlag);
         return uploadVO;
     }
