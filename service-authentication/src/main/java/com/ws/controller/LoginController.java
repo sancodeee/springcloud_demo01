@@ -41,5 +41,4 @@ public class LoginController {
         return Result.SUCCESS("注册成功");
     }
 
-
 }

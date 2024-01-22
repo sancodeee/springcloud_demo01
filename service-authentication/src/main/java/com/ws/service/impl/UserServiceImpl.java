@@ -10,7 +10,6 @@ import com.ws.dao.UserMapper;
 import com.ws.pojo.User;
 import com.ws.service.UserService;
 import com.ws.utils.TokenUtils;
-import com.ws.vo.HoneyUserVO;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 登录
      *
-     * @param user 用户
-     * @return boolean
+     * @param user     用户
+     * @param response 响应
      */
     @Override
     public void login(User user, HttpServletResponse response) {
@@ -35,13 +34,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (ObjectUtil.isNull(dbUser)) {
             throw new CustomException(422, "校验失败，该用户不存在");
         }
-        // 校验密码
+        // 用户存在则校验密码
         if (!user.getPassword().equals(dbUser.getPassword())) {
             throw new CustomException(500, "用户名或密码错误");
         }
         // 根据用户信息生成token
         String token = TokenUtils.createToken(dbUser.getId().toString(), user.getPassword());
-        // 构建带token信息的对象返回到前端
+        // 将token放入响应头中并返回
         response.setHeader(HttpHeaders.AUTHORIZATION, token);
     }
 
@@ -67,6 +66,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return true;
     }
-
 
 }
