@@ -17,7 +17,6 @@
         <module>project-gateway</module>
         <module>project-common</module>
         <module>project-api</module>
-
     </modules>
     <!-- spring boot版本 -->
     <parent>
@@ -44,7 +43,7 @@
         <!-- spring cloud alibaba版本 -->
         <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
         <!-- hutool版本 -->
-        <hutool.version>5.8.9</hutool.version>
+        <hutool.version>5.8.25</hutool.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -70,7 +69,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Lombok 通过简单注解消除冗长代码  -->
+        <!-- Lombok  -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
