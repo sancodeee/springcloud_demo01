@@ -26,6 +26,13 @@ public class AuthorizeFilter implements GlobalFilter {
 
     private final String X_ACCESS_TOKEN = "X-Access-Token";
 
+    /**
+     * 过滤器
+     *
+     * @param exchange 交换
+     * @param chain    链
+     * @return {@link Mono}<{@link Void}>
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         HttpHeaders headers = exchange.getRequest().getHeaders();

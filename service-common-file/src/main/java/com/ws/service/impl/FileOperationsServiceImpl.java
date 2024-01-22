@@ -1,6 +1,7 @@
 package com.ws.service.impl;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.ZipUtil;
 import com.ws.service.FileOperationsService;
 import com.ws.vo.FileUploadVO;
 import lombok.extern.slf4j.Slf4j;
@@ -54,7 +55,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         // 原始文件名(带后缀)
         String originalFilename = multipartFile.getOriginalFilename();
         // 文件存储路径
-        if (FileUtil.exist(basePath)) {
+        if (!FileUtil.exist(basePath)) {
             // 如果当前存储文件的父级目录不存在则创建
             FileUtil.mkdir(basePath);
         }
@@ -169,4 +170,18 @@ public class FileOperationsServiceImpl implements FileOperationsService {
         FileUtil.del(filePath);
         System.out.println("删除文件" + fileName + "成功");
     }
+
+    /**
+     * 文件压缩
+     *
+     * @param sourceFolderPath    待压缩文件夹路径
+     * @param targetZipFolderPath 目标zip文件夹路径
+     */
+    @Override
+    public void fileCompress(String sourceFolderPath, String targetZipFolderPath) {
+        String zipFilePath = targetZipFolderPath + File.separator + "output.zip";
+        ZipUtil.zip(sourceFolderPath, zipFilePath);
+    }
+
+
 }
