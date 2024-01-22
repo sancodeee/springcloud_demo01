@@ -18,11 +18,11 @@
         <module>project-common</module>
         <module>project-api</module>
     </modules>
-    <!-- spring boot版本 -->
+    <!-- 依赖父模块 spring boot版本 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
+        <version>2.5.15</version>
     </parent>
 
     <properties>
@@ -38,10 +38,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 项目统一字符集编码UTF-8 -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 依赖版本 -->
         <!-- spring cloud版本 -->
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <!-- spring cloud alibaba版本 -->
-        <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2.5.6</spring-cloud-alibaba.version>
         <!-- hutool版本 -->
         <hutool.version>5.8.25</hutool.version>
     </properties>

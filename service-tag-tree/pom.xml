@@ -3,18 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>service-tag-tree</artifactId>
+    <name>${artifactId}</name>
+    <packaging>jar</packaging>
+    <description>标签树模块</description>
+    <!-- 父模块 -->
     <parent>
         <groupId>com.ws</groupId>
         <artifactId>springcloud_demo_study</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>service-tag-tree</artifactId>
-
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 依赖版本 -->
         <mybatis.version>3.5.4.1</mybatis.version>
         <druid.version>1.2.15</druid.version>
         <log4j.version>1.2.17</log4j.version>
@@ -100,6 +104,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.6.RELEASE</version>
             </plugin>
         </plugins>
     </build>
