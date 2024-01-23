@@ -160,7 +160,7 @@ public class FileOperationsServiceImpl implements FileOperationsService {
      * @param fileName 文件名称
      */
     @Override
-    public void delFile(HttpServletResponse response, String fileName){
+    public void delFile(HttpServletResponse response, String fileName) {
         String filePath = basePath + File.separator + fileName;
         if (!FileUtil.exist(filePath)) {
             // 文件不存在设置响应头状态404
