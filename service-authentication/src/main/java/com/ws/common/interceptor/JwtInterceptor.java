@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author wangsen
  * @date 2024/01/02
  */
-public class JwtInterceptor implements HandlerInterceptor {
+public class    JwtInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserMapper userMapper;
