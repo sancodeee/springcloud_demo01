@@ -40,7 +40,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- 依赖版本 -->
         <!-- spring cloud版本 -->
-        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <!-- spring cloud alibaba版本 -->
         <spring-cloud-alibaba.version>2.5.6</spring-cloud-alibaba.version>
         <!-- hutool版本 -->
