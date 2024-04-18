@@ -13,10 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 登录控制器
+ *
+ * @author wangsen
+ * @date 2024/04/18
+ */
 @RestController
 @RequestMapping(produces = "application/json")
 public class LoginController {
 
+    /**
+     * 用户服务
+     */
     private final UserService userService;
 
     @Autowired

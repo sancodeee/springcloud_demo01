@@ -5,6 +5,12 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 路由配置
+ *
+ * @author wangsen
+ * @date 2024/04/19
+ */
 @Configuration
 public class RouteConfig {
 

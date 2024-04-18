@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class AuthorizeFilter implements GlobalFilter {
 
-    private final String X_ACCESS_TOKEN = "X-Access-Token";
+    private static final String X_ACCESS_TOKEN = "X-Access-Token";
 
     /**
      * 过滤器

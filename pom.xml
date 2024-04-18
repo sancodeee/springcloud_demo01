@@ -18,7 +18,7 @@
         <module>project-common</module>
         <module>project-api</module>
     </modules>
-    <!-- 依赖父模块 spring boot版本 -->
+    <!-- 依赖父模块 springboot 版本 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -42,7 +42,7 @@
         <!-- spring cloud版本 -->
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <!-- spring cloud alibaba版本 -->
-        <spring-cloud-alibaba.version>2.5.6</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
         <!-- hutool版本 -->
         <hutool.version>5.8.25</hutool.version>
     </properties>
@@ -82,47 +82,6 @@
             <version>${hutool.version}</version>
         </dependency>
     </dependencies>
-
-    <!-- 定义依赖下载的仓库，例如某些私有仓库 -->
-    <repositories>
-        <!--    确定spring cloud私有仓库    -->
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <!-- 禁用快照版本下载：不稳定 -->
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>aliyun</id>
-            <name>aliyun-public</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <!-- 快照版本的依赖禁止下载 -->
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jeecg</id>
-            <name>jeecg Repository</name>
-            <url>http://maven.jeecg.org/nexus/content/repositories/jeecg</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <!-- 禁止快照版本依赖下载 -->
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <build>
         <finalName>${project.name}</finalName>

@@ -31,15 +31,15 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- nacos 服务发现依赖 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+        <!-- <dependency> -->
+        <!--     <groupId>com.alibaba.cloud</groupId> -->
+        <!--     <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId> -->
+        <!-- </dependency> -->
         <!-- nacos 配置中心依赖 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
+        <!-- <dependency> -->
+        <!--     <groupId>com.alibaba.cloud</groupId> -->
+        <!--     <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId> -->
+        <!-- </dependency> -->
         <!-- 数据库连接依赖 -->
         <dependency>
             <groupId>mysql</groupId>
