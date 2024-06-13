@@ -1,4 +1,4 @@
-package com.ws.config;
+package com.ws.common.config;
 
 import com.ws.common.interceptor.RespResultInterceptor;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,6 @@
 package com.ws.common.interceptor;
 
+import com.ws.common.annotation.RespResult;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 

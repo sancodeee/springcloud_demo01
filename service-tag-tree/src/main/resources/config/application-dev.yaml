@@ -3,15 +3,8 @@ server:
 
 spring:
   application:
-    name: tagInfoService
-  cloud:
-    nacos:
-      server-addr: 127.0.0.1:8848 #nacos服务端地址
-      discovery:
-        server-addr: 127.0.0.1:8848 #nacos服务发现地址
-        cluster-name: BeijingCluster #集群名称
-        namespace: 3d077be2-bf3b-444c-aa09-4404b0e5f98c #命名空间id
-
+    name: tagService
+  # 数据库
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&serverTimezone=GMT%2B8
@@ -19,6 +12,7 @@ spring:
       password: 169167866Spl.
       driver-class-name: com.mysql.cj.jdbc.Driver
 
+# 配置MyBatis-Plus
 mybatis-plus:
   global-config:
     db-config:

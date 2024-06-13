@@ -2,6 +2,7 @@ package com.ws.common.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ws.common.Result;
+import com.ws.common.annotation.RespResult;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

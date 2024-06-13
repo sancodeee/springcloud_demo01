@@ -1,7 +1,7 @@
 package com.ws.controller;
 
 import com.ws.common.Result;
-import com.ws.common.interceptor.RespResult;
+import com.ws.common.annotation.RespResult;
 import com.ws.dao.TagInfoMapper;
 import com.ws.pojo.TagInfo;
 import com.ws.service.TagInfoService;
@@ -10,7 +10,6 @@ import com.ws.vo.TagInfoVO2;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -42,9 +41,6 @@ public class TagInfoController {
         this.tagInfoMapper = tagInfoMapper;
     }
 
-    @Value("${tagInfo.name}")
-    private String name;
-
 
     /**
      * 添加标签信息
@@ -56,7 +52,6 @@ public class TagInfoController {
     @RespResult
     @PostMapping(value = "/add")
     public Result<?> addTagInfo(@Validated @RequestBody TagInfo tagInfo, BindingResult result) {
-        log.info("nacos服务器中配置文件的值：{}", name);
         // 入参校验
         List<ObjectError> allErrors = result.getAllErrors();
         log.info("入参校验信息：{}", allErrors);
@@ -124,9 +119,8 @@ public class TagInfoController {
     @RespResult
     @GetMapping(value = "/customAnnotation")
     public List<TagInfoVO> customAnnotationTest() {
-        log.info("线上开发环境属性值：name：{}", this.name);
-        Result<List<TagInfoVO>> result = this.getAllChildByParent2(Long.valueOf(1));
-        tagInfoMapper.getTagInfoByParent(Long.valueOf(1));
+        Result<List<TagInfoVO>> result = this.getAllChildByParent2(1L);
+        tagInfoMapper.getTagInfoByParent(1L);
         return result.getData();
     }
 

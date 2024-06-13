@@ -1,4 +1,4 @@
-package com.ws.common.interceptor;
+package com.ws.common.annotation;
 
 import java.lang.annotation.*;
 
