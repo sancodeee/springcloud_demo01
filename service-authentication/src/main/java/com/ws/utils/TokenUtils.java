@@ -3,7 +3,7 @@ package com.ws.utils;
 import cn.hutool.core.date.DateUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.ws.dao.UserMapper;
+import com.ws.mapper.UserMapper;
 import com.ws.pojo.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

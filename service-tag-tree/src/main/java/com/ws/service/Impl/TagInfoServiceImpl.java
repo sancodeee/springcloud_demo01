@@ -3,19 +3,18 @@ package com.ws.service.Impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ws.common.Result;
-import com.ws.dao.TagInfoMapper;
-import com.ws.pojo.TagInfo;
+import com.ws.entity.pojo.TagInfo;
+import com.ws.entity.vo.TagInfoVO;
+import com.ws.entity.vo.TagInfoVO2;
+import com.ws.mapper.TagInfoMapper;
 import com.ws.service.TagInfoService;
-import com.ws.vo.TagInfoVO;
-import com.ws.vo.TagInfoVO2;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,14 +27,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> implements TagInfoService {
 
     private final TagInfoMapper tagInfoMapper;
-
-    @Autowired
-    public TagInfoServiceImpl(TagInfoMapper tagInfoMapper) {
-        this.tagInfoMapper = tagInfoMapper;
-    }
 
 
     /**
@@ -95,7 +90,7 @@ public class TagInfoServiceImpl extends ServiceImpl<TagInfoMapper, TagInfo> impl
     public List<TagInfo> getTagInfoByParent(Long parentId) {
         if (parentId == null) {
             log.info("入参为空！");
-            return Collections.EMPTY_LIST;
+            return new ArrayList<>();
         }
         return tagInfoMapper.getTagInfoByParent(parentId);
     }

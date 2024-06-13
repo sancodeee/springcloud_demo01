@@ -2,9 +2,9 @@ package com.ws.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ws.common.Result;
-import com.ws.pojo.TagInfo;
-import com.ws.vo.TagInfoVO;
-import com.ws.vo.TagInfoVO2;
+import com.ws.entity.pojo.TagInfo;
+import com.ws.entity.vo.TagInfoVO;
+import com.ws.entity.vo.TagInfoVO2;
 
 import java.util.List;
 

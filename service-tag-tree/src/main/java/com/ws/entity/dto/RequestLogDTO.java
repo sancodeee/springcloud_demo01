@@ -1,4 +1,4 @@
-package com.ws.dto;
+package com.ws.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

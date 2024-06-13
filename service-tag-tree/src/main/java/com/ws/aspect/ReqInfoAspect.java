@@ -1,6 +1,6 @@
 package com.ws.aspect;
 
-import com.ws.dto.RequestLogDTO;
+import com.ws.entity.dto.RequestLogDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

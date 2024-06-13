@@ -1,4 +1,4 @@
-package com.ws.exception;
+package com.ws.common.exception;
 
 import com.ws.common.Result;
 import lombok.extern.slf4j.Slf4j;

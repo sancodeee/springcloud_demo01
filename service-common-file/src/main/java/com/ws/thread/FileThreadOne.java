@@ -1,6 +1,6 @@
 package com.ws.thread;
 
-import com.ws.dao.FileInfoMapper;
+import com.ws.mapper.FileInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

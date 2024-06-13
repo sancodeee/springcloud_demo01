@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ws.common.ResultCodeEnum;
-import com.ws.dao.FileInfoMapper;
+import com.ws.mapper.FileInfoMapper;
 import com.ws.exception.CustomException;
 import com.ws.pojo.FileInfo;
 import com.ws.service.FileInfoService;

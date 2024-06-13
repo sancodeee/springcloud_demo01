@@ -1,7 +1,7 @@
 package com.ws.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.ws.dao.FileInfoMapper;
+import com.ws.mapper.FileInfoMapper;
 import com.ws.pojo.FileInfo;
 import com.ws.thread.FileThreadOne;
 import lombok.extern.slf4j.Slf4j;

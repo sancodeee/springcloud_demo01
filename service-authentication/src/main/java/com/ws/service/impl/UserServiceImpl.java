@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ws.common.exception.CustomException;
-import com.ws.dao.UserMapper;
+import com.ws.mapper.UserMapper;
 import com.ws.pojo.User;
 import com.ws.service.UserService;
 import com.ws.utils.TokenUtils;

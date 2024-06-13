@@ -19,17 +19,19 @@
         <druid.version>1.2.15</druid.version>
         <log4j.version>1.2.17</log4j.version>
     </properties>
+
+    <!-- 依赖依赖 -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- nacos 服务发现依赖 -->
+        <!-- nacos 服务发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!-- nacos 配置中心依赖 -->
+        <!-- nacos 配置 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>

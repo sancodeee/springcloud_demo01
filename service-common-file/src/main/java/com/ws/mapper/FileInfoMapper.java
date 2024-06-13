@@ -1,4 +1,4 @@
-package com.ws.dao;
+package com.ws.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ws.pojo.FileInfo;

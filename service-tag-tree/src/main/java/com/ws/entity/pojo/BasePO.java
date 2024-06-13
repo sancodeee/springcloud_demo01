@@ -1,4 +1,4 @@
-package com.ws.pojo;
+package com.ws.entity.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

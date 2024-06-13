@@ -1,4 +1,4 @@
-package com.ws.exception;
+package com.ws.common.exception;
 
 import com.ws.common.ResultCodeEnum;
 import lombok.AllArgsConstructor;

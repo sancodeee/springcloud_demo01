@@ -1,8 +1,8 @@
-package com.ws.dao;
+package com.ws.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ws.pojo.TagInfo;
-import com.ws.vo.TagInfoVO;
+import com.ws.entity.pojo.TagInfo;
+import com.ws.entity.vo.TagInfoVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

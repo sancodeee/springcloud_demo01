@@ -2,11 +2,11 @@ package com.ws.controller;
 
 import com.ws.common.Result;
 import com.ws.common.annotation.RespResult;
-import com.ws.dao.TagInfoMapper;
-import com.ws.pojo.TagInfo;
+import com.ws.mapper.TagInfoMapper;
+import com.ws.entity.pojo.TagInfo;
 import com.ws.service.TagInfoService;
-import com.ws.vo.TagInfoVO;
-import com.ws.vo.TagInfoVO2;
+import com.ws.entity.vo.TagInfoVO;
+import com.ws.entity.vo.TagInfoVO2;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

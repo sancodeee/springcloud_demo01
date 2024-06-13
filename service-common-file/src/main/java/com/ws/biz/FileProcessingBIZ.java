@@ -2,7 +2,7 @@ package com.ws.biz;
 
 import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.ws.dao.FileInfoMapper;
+import com.ws.mapper.FileInfoMapper;
 import com.ws.pojo.FileInfo;
 import com.ws.service.FileInfoService;
 import com.ws.service.FileOperationsService;

@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.ws.common.exception.CustomException;
-import com.ws.dao.UserMapper;
+import com.ws.mapper.UserMapper;
 import com.ws.pojo.User;
 import com.ws.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;

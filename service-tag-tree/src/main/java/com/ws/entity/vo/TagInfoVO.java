@@ -1,6 +1,6 @@
-package com.ws.vo;
+package com.ws.entity.vo;
 
-import com.ws.pojo.TagInfo;
+import com.ws.entity.pojo.TagInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
