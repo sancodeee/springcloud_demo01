@@ -74,7 +74,7 @@ public class ReqInfoAspect {
      */
     @AfterReturning(returning = "res", pointcut = "log()")
     public void afterReturn(Object res) {
-        log.info("Request：{}", res);
+        log.info("Response: {}", res);
     }
 
 }
